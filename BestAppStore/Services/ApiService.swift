@@ -10,7 +10,8 @@ import Foundation
 
 class ApiService {
     
-    static let shared = ApiService() // Singleton
+    // Singleton
+    static let shared = ApiService()
     
     func searchApps(searchTerm: String = "Instagram", completion: @escaping ([SoftwareResult], Error?) -> ()) {
         let urlString = "https://itunes.apple.com/search?term=\(searchTerm)&entity=software"

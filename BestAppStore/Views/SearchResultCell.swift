@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class SearchResultCell: UICollectionViewCell {
     
@@ -15,15 +16,18 @@ class SearchResultCell: UICollectionViewCell {
             nameLabel.text = softwareResult?.trackName
             categoryLabel.text = softwareResult?.primaryGenreName
             ratingsLabel.text = getFormattedRatingsCount(softwareResult?.userRatingCount)
+            setAppIconImage(softwareResult?.artworkUrl100)
+            setScreenShotImages(softwareResult?.screenshotUrls ?? [])
         }
     }
     
     let appIconImageView: UIImageView = {
         let iv = UIImageView()
-        iv.backgroundColor = .red
+        iv.backgroundColor = .clear
         iv.widthAnchor.constraint(equalToConstant: 64).isActive = true
         iv.heightAnchor.constraint(equalToConstant: 64).isActive = true
         iv.layer.cornerRadius = 12
+        iv.clipsToBounds = true
         return iv
     }()
     
@@ -64,6 +68,11 @@ class SearchResultCell: UICollectionViewCell {
     func createScreeShotImgageView() -> UIImageView {
         let iv = UIImageView()
         iv.backgroundColor = searchResultScreenShotBackgroundColor
+        iv.contentMode = .scaleAspectFit
+        iv.layer.cornerRadius = 5
+        iv.clipsToBounds = true
+        iv.layer.borderWidth = 0.5
+        iv.layer.borderColor = UIColor(white: 0.5, alpha: 0.5).cgColor
         return iv
     }
 
@@ -128,5 +137,27 @@ class SearchResultCell: UICollectionViewCell {
         } else {
             return "0"
         }
+    }
+    
+    fileprivate func setAppIconImage(_ iconUrl: String?) {
+        guard let url = URL(string: iconUrl ?? "") else { return }
+        appIconImageView.sd_setImage(with: url)
+    }
+    
+    fileprivate func setScreenShotImages(_ screenshotUrls: [String]) {
+        if screenshotUrls.count > 0 {
+            screenShot1ImageView.sd_setImage(with: URL(string: screenshotUrls[0]))
+        }
+        if screenshotUrls.count > 1 {
+            screenShot2ImageView.sd_setImage(with: URL(string: screenshotUrls[1]))
+        }
+        if screenshotUrls.count > 2 {
+            screenShot3ImageView.sd_setImage(with: URL(string: screenshotUrls[2]))
+        }
+    }
+    
+    fileprivate func setScreenShotImage(imageView: UIImageView, screenshotUrl: String) {
+        guard let url = URL(string: screenshotUrl) else { return }
+        imageView.sd_setImage(with: url)
     }
 }

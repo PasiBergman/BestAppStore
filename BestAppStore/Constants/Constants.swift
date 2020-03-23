@@ -24,5 +24,6 @@ let searchTabBarIconName = "search"
 let searchBackgroundColor = todayBackgroundColor
 let searchCollectionViewCellId = "searchCell"
 let searchResultCellBackgroundColor = todayBackgroundColor
-let searchResultScreenShotBackgroundColor = UIColor.gray
+let searchResultScreenShotBackgroundColor = UIColor.clear
+let noSearchResultsLabelText = "No search results"
 

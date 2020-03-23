@@ -13,4 +13,5 @@ struct SoftwareResult: Decodable {
     let primaryGenreName: String
     var userRatingCount: Int?
     let screenshotUrls: [String]
+    let artworkUrl100: String
 }
