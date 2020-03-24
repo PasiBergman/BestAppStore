@@ -13,13 +13,13 @@ class BaseTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = .yellow
+        view.backgroundColor = .white
         
         // Today
         let todayNavController = createNavController(UIViewController(), title: todayBarTitle, iconName: todayTabBarIconName)
         
         // Apps
-        let appsNavController = createNavController(UIViewController(), title: appsBarTitle, iconName: appsTabBarIconName)
+        let appsNavController = createNavController(AppsPageController(), title: appsBarTitle, iconName: appsTabBarIconName)
         
         // Search
         let searchNavController = createNavController(SearchController(), title: searchBarTitle, iconName: searchTabBarIconName)

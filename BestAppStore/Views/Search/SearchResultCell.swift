@@ -22,12 +22,10 @@ class SearchResultCell: UICollectionViewCell {
     }
     
     let appIconImageView: UIImageView = {
-        let iv = UIImageView()
+        let iv = UIImageView(cornerRadius: appIconCornerRadius)
         iv.backgroundColor = .clear
-        iv.widthAnchor.constraint(equalToConstant: 64).isActive = true
-        iv.heightAnchor.constraint(equalToConstant: 64).isActive = true
-        iv.layer.cornerRadius = 12
-        iv.clipsToBounds = true
+        iv.widthAnchor.constraint(equalToConstant: appIconWidthHeight).isActive = true
+        iv.heightAnchor.constraint(equalToConstant: appIconWidthHeight).isActive = true
         return iv
     }()
     
@@ -45,7 +43,6 @@ class SearchResultCell: UICollectionViewCell {
 
     let ratingsLabel: UILabel = {
         let label = UILabel()
-        label.text = "9.56M"
         return label
     }()
     
@@ -54,10 +51,10 @@ class SearchResultCell: UICollectionViewCell {
         btn.setTitle("GET", for: .normal)
         btn.setTitleColor(.blue, for: .normal)
         btn.titleLabel?.font = .boldSystemFont(ofSize: 14)
-        btn.backgroundColor = UIColor(white: 0.95, alpha: 1)
-        btn.layer.cornerRadius = 16
-        btn.widthAnchor.constraint(equalToConstant: 80).isActive = true
-        btn.heightAnchor.constraint(equalToConstant: 32).isActive = true
+        btn.backgroundColor = getButtonColor
+        btn.layer.cornerRadius = getButtonHeight / 2
+        btn.widthAnchor.constraint(equalToConstant: getButtonWidth).isActive = true
+        btn.heightAnchor.constraint(equalToConstant: getButtonHeight).isActive = true
         return btn
     }()
     
@@ -66,11 +63,8 @@ class SearchResultCell: UICollectionViewCell {
     lazy var screenShot3ImageView = self.createScreeShotImgageView()
         
     func createScreeShotImgageView() -> UIImageView {
-        let iv = UIImageView()
+        let iv = UIImageView(cornerRadius: 5)
         iv.backgroundColor = searchResultScreenShotBackgroundColor
-        iv.contentMode = .scaleAspectFit
-        iv.layer.cornerRadius = 5
-        iv.clipsToBounds = true
         iv.layer.borderWidth = 0.5
         iv.layer.borderColor = UIColor(white: 0.5, alpha: 0.5).cgColor
         return iv

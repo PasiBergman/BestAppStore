@@ -17,6 +17,16 @@ let todayBackgroundColor = UIColor.white
 let appsBarTitle = "Apps"
 let appsTabBarIconName = "apps"
 let appsBackgroundColor = todayBackgroundColor
+let appsCollectionViewCellId = "appsCell"
+let appsHorizontalCollectionViewCellId = "horizontalAppsCell"
+let appsPageHeaderViewCellId = "headerAppsCell"
+let appsHeaderHorizontalCellId = "appsHeaderHorizontalCell"
+let appIconCornerRadius: CGFloat = 12
+let appIconWidthHeight: CGFloat = 64
+let getButtonWidth: CGFloat = 80
+let getButtonHeight: CGFloat = 32
+let getButtonColor = UIColor(white: 0.95, alpha: 1)
+
 
 // SEARCH
 let searchBarTitle = "Search"

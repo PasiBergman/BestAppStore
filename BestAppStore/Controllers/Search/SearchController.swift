@@ -8,16 +8,14 @@
 
 import UIKit
 
-class SearchController: UICollectionViewController, UICollectionViewDelegateFlowLayout, UISearchBarDelegate {
+class SearchController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout, UISearchBarDelegate {
     
     var appResults = [SoftwareResult]()
     
     fileprivate let appSearchController = UISearchController(searchResultsController: nil)
     fileprivate let noSearchResultsLabel: UILabel = {
-       let label = UILabel()
-        label.text = noSearchResultsLabelText
+        let label = UILabel(text: noSearchResultsLabelText, font: .systemFont(ofSize: 20, weight: .regular))
         label.textAlignment = .center
-        label.font = UIFont.systemFont(ofSize: 20, weight: .regular)
         label.textColor = .lightGray
         return label
     }()
@@ -72,15 +70,6 @@ class SearchController: UICollectionViewController, UICollectionViewDelegateFlow
 //        appSearchController.isActive = false
 //        appSearchController.searchBar.text = searchText
 //    }
-
-    init() {
-        super.init(collectionViewLayout: UICollectionViewFlowLayout())
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
 
     // MARK: - Fileprivate
     
