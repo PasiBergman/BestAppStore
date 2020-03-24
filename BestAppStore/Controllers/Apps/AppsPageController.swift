@@ -12,6 +12,7 @@ class AppsPageController: BaseCollectionViewController, UICollectionViewDelegate
     
     var activityIndicator = ActivityIndicatorView()
     var groups = [Feed]()
+    var socialApps = [SocialApp]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,7 +52,9 @@ class AppsPageController: BaseCollectionViewController, UICollectionViewDelegate
     }
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: appsPageHeaderViewCellId, for: indexPath)
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: appsPageHeaderViewCellId, for: indexPath) as! AppsPageHeader
+        
+        header.socialApps = socialApps
         
         return header
     }
@@ -62,11 +65,10 @@ class AppsPageController: BaseCollectionViewController, UICollectionViewDelegate
     
     // MARK: - Fileprivate
     
-     fileprivate func setupActivityIndicator() {
-         view.addSubview(activityIndicator)
-         activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-         activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-     }
+    fileprivate func setupActivityIndicator() {
+        view.addSubview(activityIndicator)
+        activityIndicator.fillSuperview()
+    }
     
     fileprivate func fetchData() {
         
@@ -80,11 +82,23 @@ class AppsPageController: BaseCollectionViewController, UICollectionViewDelegate
         activityIndicator.startAnimating()
         
         dispatchGroup.enter()
-        ApiService.shared.editorsChoiceApps(completion: { (feed, err) in
+        ApiService.shared.fetchSocialApps(completion: { (result, err) in
+            if let err = err {
+                print("Failed to fetch social apps result:", err)
+            } else {
+                if let data = result {
+                    self.socialApps = data
+                }
+            }
+            dispatchGroup.leave()
+        })
+        
+        dispatchGroup.enter()
+        ApiService.shared.editorsChoiceApps(completion: { (feedResult, err) in
             if let err = err {
                 print("Failed to fetch editor's choice app results:", err)
             } else {
-                if let appGroup = feed {
+                if let appGroup = feedResult?.feed {
                     appGroupEditorsChoice = appGroup
                 }
             }
@@ -92,11 +106,11 @@ class AppsPageController: BaseCollectionViewController, UICollectionViewDelegate
         })
         
         dispatchGroup.enter()
-        ApiService.shared.topFreeApps(completion: { (feed, err) in
+        ApiService.shared.topFreeApps(completion: { (feedResult, err) in
             if let err = err {
                 print("Failed to fetch top free apps results:", err)
             } else {
-                if let appGroup = feed {
+                if let appGroup = feedResult?.feed {
                     appGroupTopFree = appGroup
                 }
             }
@@ -104,11 +118,11 @@ class AppsPageController: BaseCollectionViewController, UICollectionViewDelegate
         })
         
         dispatchGroup.enter()
-        ApiService.shared.topPaidApps(completion: { (feed, err) in
+        ApiService.shared.topPaidApps(completion: { (feedResult, err) in
             if let err = err {
                 print("Failed to fetch top paid apps results:", err)
             } else {
-                if let appGroup = feed {
+                if let appGroup = feedResult?.feed {
                     appGroupTopPaid = appGroup
                 }
             }
@@ -116,11 +130,11 @@ class AppsPageController: BaseCollectionViewController, UICollectionViewDelegate
         })
         
         dispatchGroup.enter()
-        ApiService.shared.topGrossingApps(completion: { (feed, err) in
+        ApiService.shared.topGrossingApps(completion: { (feedResult, err) in
             if let err = err {
                 print("Failed to fetch top grossing apps results:", err)
             } else {
-                if let appGroup = feed {
+                if let appGroup = feedResult?.feed {
                     appGroupTopGrossing = appGroup
                 }
             }

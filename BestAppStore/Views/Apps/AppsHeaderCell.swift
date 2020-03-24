@@ -8,7 +8,15 @@
 
 import UIKit
 
-class AppsHeaderHeader: UICollectionViewCell {
+class AppsHeaderCell: UICollectionViewCell {
+    
+    var socialApp: SocialApp? {
+        didSet {
+            companyLabel.text = socialApp?.name
+            titleLabel.text = socialApp?.tagline
+            setAppImageView(socialApp?.imageUrl ?? "")
+        }
+    }
     
     let companyLabel: UILabel = {
         let label = UILabel(text: "Company", font: UIFont.systemFont(ofSize: 12))
@@ -23,7 +31,7 @@ class AppsHeaderHeader: UICollectionViewCell {
     
     let appImageView: UIImageView = {
         let iv = UIImageView(cornerRadius: 8)
-        iv.backgroundColor = .red
+        iv.contentMode = .scaleAspectFill
         return iv
     }()
     
@@ -43,6 +51,11 @@ class AppsHeaderHeader: UICollectionViewCell {
             
         addSubview(stackView)
         stackView.fillSuperview(padding: .init(top: 16, left: 0, bottom: 0, right: 0))
+    }
+    
+    fileprivate func setAppImageView(_ imageUrl: String) {
+        guard let url = URL(string: imageUrl) else { return }
+        appImageView.sd_setImage(with: url)
     }
     
     required init?(coder: NSCoder) {

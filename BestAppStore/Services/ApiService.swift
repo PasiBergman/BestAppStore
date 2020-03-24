@@ -13,62 +13,43 @@ class ApiService {
     // Singleton
     static let shared = ApiService()
     
-    func searchApps(searchTerm: String, completion: @escaping ([SoftwareResult], Error?) -> ()) {
+    func searchApps(searchTerm: String, completion: @escaping ([SoftwareResult]?, Error?) -> ()) {
         guard let encodedSearchTerm = searchTerm.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
             completion([], nil)
             return
         }
         let urlString = "https://itunes.apple.com/search?term=\(encodedSearchTerm)&entity=software"
 
-        guard let url = URL(string: urlString) else {
-            completion([], URLError(.unsupportedURL))
-            return
-        }
-        
-        URLSession.shared.dataTask(with: url) { (data, resp, err) in
-            if let err = err {
-                completion([], err)
-                return
-            }
-            
-            guard let data = data else {
-                completion([], nil)
-                return
-            }
-            
-            do {
-                let searchResult = try JSONDecoder().decode(SearchResult.self, from: data)
-                
-                completion(searchResult.results, nil)
-            } catch let jsonError {
-                completion([], jsonError)
-            }
-            
-        }.resume()
+        fetchGenericJsonData(urlString: urlString, completion: completion)
     }
     
-    func editorsChoiceApps(completion: @escaping (Feed?, Error?) -> ()) {
+    func fetchSocialApps(completion: @escaping ([SocialApp]?, Error?) -> ()) {
+        let urlString = "https://api.letsbuildthatapp.com/appstore/social"
+        fetchGenericJsonData(urlString: urlString, completion: completion)
+    }
+    
+    func editorsChoiceApps(completion: @escaping (FeedResult?, Error?) -> ()) {
         let urlString = "https://rss.itunes.apple.com/api/v1/fi/ios-apps/new-apps-we-love/all/25/explicit.json"
-        fetchAppGroup(urlString: urlString, completion: completion)
+        fetchGenericJsonData(urlString: urlString, completion: completion)
     }
     
-    func topFreeApps(completion: @escaping (Feed?, Error?) -> ()) {
+    func topFreeApps(completion: @escaping (FeedResult?, Error?) -> ()) {
         let urlString = "https://rss.itunes.apple.com/api/v1/fi/ios-apps/top-free/all/25/explicit.json"
-        fetchAppGroup(urlString: urlString, completion: completion)
+        fetchGenericJsonData(urlString: urlString, completion: completion)
     }
     
-    func topPaidApps(completion: @escaping (Feed?, Error?) -> ()) {
+    func topPaidApps(completion: @escaping (FeedResult?, Error?) -> ()) {
         let urlString = "https://rss.itunes.apple.com/api/v1/fi/ios-apps/top-paid/all/25/explicit.json"
-        fetchAppGroup(urlString: urlString, completion: completion)
+        fetchGenericJsonData(urlString: urlString, completion: completion)
     }
     
-    func topGrossingApps(completion: @escaping (Feed?, Error?) -> ()) {
+    func topGrossingApps(completion: @escaping (FeedResult?, Error?) -> ()) {
         let urlString = "https://rss.itunes.apple.com/api/v1/fi/ios-apps/top-grossing/all/25/explicit.json"
-        fetchAppGroup(urlString: urlString, completion: completion)
+        fetchGenericJsonData(urlString: urlString, completion: completion)
     }
     
     
-    fileprivate func fetchAppGroup(urlString: String, completion: @escaping (Feed?, Error?) -> Void) {
+    fileprivate func fetchGenericJsonData<T: Decodable>(urlString: String, completion: @escaping (T?, Error?) -> ()) {
         guard let url = URL(string: urlString) else { return }
         
         URLSession.shared.dataTask(with: url) { (data, resp, err) in
@@ -83,9 +64,9 @@ class ApiService {
             }
             
             do {
-                let feedResult = try JSONDecoder().decode(FeedResult.self, from: data)
+                let result = try JSONDecoder().decode(T.self, from: data)
                 
-                completion(feedResult.feed, nil)
+                completion(result, nil)
             } catch let jsonError {
                 completion(nil, jsonError)
             }

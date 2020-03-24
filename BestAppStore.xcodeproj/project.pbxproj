@@ -35,6 +35,7 @@
 		3F8C413F2429C26D004CA1B1 /* AppsHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8C413E2429C26D004CA1B1 /* AppsHeaderCell.swift */; };
 		3F8C41412429CF24004CA1B1 /* FeedResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8C41402429CF24004CA1B1 /* FeedResult.swift */; };
 		3F8C41442429FC23004CA1B1 /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8C41432429FC23004CA1B1 /* ActivityIndicatorView.swift */; };
+		3F8C4146242A3017004CA1B1 /* SocialApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8C4145242A3017004CA1B1 /* SocialApp.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,6 +68,7 @@
 		3F8C413E2429C26D004CA1B1 /* AppsHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppsHeaderCell.swift; sourceTree = "<group>"; };
 		3F8C41402429CF24004CA1B1 /* FeedResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedResult.swift; sourceTree = "<group>"; };
 		3F8C41432429FC23004CA1B1 /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
+		3F8C4145242A3017004CA1B1 /* SocialApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialApp.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -198,6 +200,7 @@
 				3F30956A242830C40004ED83 /* SearchResult.swift */,
 				3F30956C242831C80004ED83 /* SoftwareResult.swift */,
 				3F8C41402429CF24004CA1B1 /* FeedResult.swift */,
+				3F8C4145242A3017004CA1B1 /* SocialApp.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -312,6 +315,7 @@
 				3F67678C2428E08600968D5B /* AppRowCell.swift in Sources */,
 				3F309569242828900004ED83 /* VerticalStackView.swift in Sources */,
 				3F8C413B2429B2E3004CA1B1 /* AppsPageHeader.swift in Sources */,
+				3F8C4146242A3017004CA1B1 /* SocialApp.swift in Sources */,
 				3F8C41442429FC23004CA1B1 /* ActivityIndicatorView.swift in Sources */,
 				3F309579242892710004ED83 /* AppsPageController.swift in Sources */,
 				3F30957024283BB80004ED83 /* Extensions+Double.swift in Sources */,

@@ -14,6 +14,7 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
     var activityIndicator = ActivityIndicatorView()
     
     fileprivate let appSearchController = UISearchController(searchResultsController: nil)
+    
     fileprivate let noSearchResultsLabel: UILabel = {
         let label = UILabel(text: noSearchResultsLabelText, font: .systemFont(ofSize: 20, weight: .regular))
         label.textAlignment = .center
@@ -34,22 +35,11 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        //  timer?.invalidate()
         let searchText = searchBar.text ?? ""
         fetchITunesApps(searchTerm: searchText)
         appSearchController.isActive = false
         searchBar.text = searchText
     }
-    
-//    var timer: Timer?
-
-//    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-//        timer?.invalidate()
-//
-//        timer = Timer.scheduledTimer(withTimeInterval: 0.75, repeats: false, block: { (_) in
-//            self.fetchITunesApps(searchTerm: searchText)
-//        })
-//    }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return .init(width: view.frame.width, height: 320)
@@ -82,8 +72,7 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
     
     fileprivate func setupActivityIndicator() {
         view.addSubview(activityIndicator)
-        activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        activityIndicator.fillSuperview()
     }
     
     fileprivate func setupSearchBar() {
@@ -117,11 +106,13 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
         prepareForSearch()
         
         ApiService.shared.searchApps(searchTerm: searchTerm, completion: {
-            (searchResults, err) in
+            (data, err) in
             if let err = err {
                 print("Failed to fetch search results:", err)
             } else {
-                self.searchResults = searchResults
+                if let searchResults = data {
+                    self.searchResults = searchResults
+                }
             }
             self.endSearch()
         })
