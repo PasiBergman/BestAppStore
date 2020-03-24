@@ -26,6 +26,8 @@ let appIconWidthHeight: CGFloat = 64
 let getButtonWidth: CGFloat = 80
 let getButtonHeight: CGFloat = 32
 let getButtonColor = UIColor(white: 0.95, alpha: 1)
+let horizontalScollLeftRightPadding: CGFloat = 16
+let horizontalScrollPeakNextDeduction: CGFloat = 12
 
 
 // SEARCH

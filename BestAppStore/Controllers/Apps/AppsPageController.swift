@@ -142,6 +142,7 @@ class AppsPageController: BaseCollectionViewController, UICollectionViewDelegate
         })
         
         dispatchGroup.notify(queue: .main) {
+            self.activityIndicator.stopAnimating()
             if let appGroup = appGroupEditorsChoice {
                 self.groups.append(appGroup)
             }
@@ -154,7 +155,6 @@ class AppsPageController: BaseCollectionViewController, UICollectionViewDelegate
             if let appGroup = appGroupTopGrossing {
                 self.groups.append(appGroup)
             }
-            self.activityIndicator.stopAnimating()
             self.collectionView.reloadData()
         }
     }

@@ -8,9 +8,8 @@
 
 import UIKit
 
-class AppsHorizontalController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout {
+class AppsHorizontalController: HorizontalSnappingController, UICollectionViewDelegateFlowLayout {
     
-    let leftRightPadding: CGFloat = 16
     let lineSpacing: CGFloat = 12
     let rowCount: CGFloat = 3
     
@@ -26,9 +25,7 @@ class AppsHorizontalController: BaseCollectionViewController, UICollectionViewDe
         
         collectionView.register(AppRowCell.self, forCellWithReuseIdentifier: appsHorizontalCollectionViewCellId)
         
-        if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
-            layout.scrollDirection = .horizontal
-        }
+        collectionView.contentInset = .init(top: 0, left: horizontalScollLeftRightPadding, bottom: 0, right: horizontalScollLeftRightPadding)
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -45,16 +42,16 @@ class AppsHorizontalController: BaseCollectionViewController, UICollectionViewDe
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let itemWidth = view.frame.width - (2 * leftRightPadding) - 12
+        let itemWidth = collectionView.frame.width - (2 * horizontalScollLeftRightPadding) - horizontalScrollPeakNextDeduction
         let itemHeight = (view.frame.height - (lineSpacing * 2)) / rowCount
         return .init(width: itemWidth, height: itemHeight)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return .init(top: 0, left: leftRightPadding, bottom: 0, right: leftRightPadding)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return lineSpacing
     }
+    
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+//        return .init(top: 0, left: 0, bottom: 0, right: 0)
+//    }
 }

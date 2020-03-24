@@ -29,22 +29,22 @@ class ApiService {
     }
     
     func editorsChoiceApps(completion: @escaping (FeedResult?, Error?) -> ()) {
-        let urlString = "https://rss.itunes.apple.com/api/v1/fi/ios-apps/new-apps-we-love/all/25/explicit.json"
+        let urlString = "https://rss.itunes.apple.com/api/v1/fi/ios-apps/new-apps-we-love/all/50/explicit.json"
         fetchGenericJsonData(urlString: urlString, completion: completion)
     }
     
     func topFreeApps(completion: @escaping (FeedResult?, Error?) -> ()) {
-        let urlString = "https://rss.itunes.apple.com/api/v1/fi/ios-apps/top-free/all/25/explicit.json"
+        let urlString = "https://rss.itunes.apple.com/api/v1/fi/ios-apps/top-free/all/50/explicit.json"
         fetchGenericJsonData(urlString: urlString, completion: completion)
     }
     
     func topPaidApps(completion: @escaping (FeedResult?, Error?) -> ()) {
-        let urlString = "https://rss.itunes.apple.com/api/v1/fi/ios-apps/top-paid/all/25/explicit.json"
+        let urlString = "https://rss.itunes.apple.com/api/v1/fi/ios-apps/top-paid/all/50/explicit.json"
         fetchGenericJsonData(urlString: urlString, completion: completion)
     }
     
     func topGrossingApps(completion: @escaping (FeedResult?, Error?) -> ()) {
-        let urlString = "https://rss.itunes.apple.com/api/v1/fi/ios-apps/top-grossing/all/25/explicit.json"
+        let urlString = "https://rss.itunes.apple.com/api/v1/fi/ios-apps/top-grossing/all/50/explicit.json"
         fetchGenericJsonData(urlString: urlString, completion: completion)
     }
     

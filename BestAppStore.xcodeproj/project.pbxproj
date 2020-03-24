@@ -36,6 +36,7 @@
 		3F8C41412429CF24004CA1B1 /* FeedResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8C41402429CF24004CA1B1 /* FeedResult.swift */; };
 		3F8C41442429FC23004CA1B1 /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8C41432429FC23004CA1B1 /* ActivityIndicatorView.swift */; };
 		3F8C4146242A3017004CA1B1 /* SocialApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8C4145242A3017004CA1B1 /* SocialApp.swift */; };
+		3F8C414A242A6662004CA1B1 /* HorizontalSnappingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8C4149242A6662004CA1B1 /* HorizontalSnappingController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,6 +70,7 @@
 		3F8C41402429CF24004CA1B1 /* FeedResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedResult.swift; sourceTree = "<group>"; };
 		3F8C41432429FC23004CA1B1 /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
 		3F8C4145242A3017004CA1B1 /* SocialApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialApp.swift; sourceTree = "<group>"; };
+		3F8C4149242A6662004CA1B1 /* HorizontalSnappingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalSnappingController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -190,6 +192,7 @@
 				3F3095772428924F0004ED83 /* Apps */,
 				3F8808712427720600B80590 /* BaseTabBarController.swift */,
 				3F30957A242894280004ED83 /* BaseCollectionViewController.swift */,
+				3F8C4149242A6662004CA1B1 /* HorizontalSnappingController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -302,6 +305,7 @@
 				3F3095672427B9A30004ED83 /* Extensions+UIView.swift in Sources */,
 				3F6767902428F84200968D5B /* Extensions+UIButton.swift in Sources */,
 				3F30956B242830C40004ED83 /* SearchResult.swift in Sources */,
+				3F8C414A242A6662004CA1B1 /* HorizontalSnappingController.swift in Sources */,
 				3F309573242840750004ED83 /* ApiService.swift in Sources */,
 				3F88085A2427708D00B80590 /* AppDelegate.swift in Sources */,
 				3F6767862428B46000968D5B /* AppsGroupCell.swift in Sources */,
