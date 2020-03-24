@@ -14,6 +14,12 @@ class AppsHorizontalController: BaseCollectionViewController, UICollectionViewDe
     let lineSpacing: CGFloat = 12
     let rowCount: CGFloat = 3
     
+    var apps = [AppResult]() {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.backgroundColor = .white
@@ -26,12 +32,14 @@ class AppsHorizontalController: BaseCollectionViewController, UICollectionViewDe
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return apps.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: appsHorizontalCollectionViewCellId, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: appsHorizontalCollectionViewCellId, for: indexPath) as! AppRowCell
+        
+        cell.app = apps[indexPath.item]
         
         return cell
     }

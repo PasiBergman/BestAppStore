@@ -10,6 +10,13 @@ import UIKit
 
 class AppsGroupCell: UICollectionViewCell {
     
+    var feed: Feed? = nil {
+        didSet {
+            appGroupTitleLabel.text = feed?.title
+            horizontalController.apps = feed?.results ?? []
+        }
+    }
+    
     let appGroupTitleLabel = UILabel(text: "App Section", font: .boldSystemFont(ofSize: 26))
     
     let horizontalController = AppsHorizontalController()

@@ -10,7 +10,8 @@ import UIKit
 
 class SearchController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout, UISearchBarDelegate {
     
-    var appResults = [SoftwareResult]()
+    var searchResults = [SoftwareResult]()
+    var activityIndicator = ActivityIndicatorView()
     
     fileprivate let appSearchController = UISearchController(searchResultsController: nil)
     fileprivate let noSearchResultsLabel: UILabel = {
@@ -28,6 +29,7 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
         collectionView.register(SearchResultCell.self, forCellWithReuseIdentifier: searchCollectionViewCellId)
         
         setupSearchResultLabel()
+        setupActivityIndicator()
         setupSearchBar()
     }
     
@@ -55,13 +57,13 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: searchCollectionViewCellId, for: indexPath) as! SearchResultCell
-        cell.softwareResult = appResults[indexPath.item]
+        cell.softwareResult = searchResults[indexPath.item]
         return cell
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        noSearchResultsLabel.isHidden = appResults.count != 0
-        return appResults.count
+        noSearchResultsLabel.isHidden = searchResults.count != 0 || activityIndicator.isAnimating
+        return searchResults.count
     }
     
 //    override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
@@ -78,6 +80,12 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
         noSearchResultsLabel.fillSuperview()
     }
     
+    fileprivate func setupActivityIndicator() {
+        view.addSubview(activityIndicator)
+        activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+    }
+    
     fileprivate func setupSearchBar() {
         definesPresentationContext = true
         navigationItem.searchController = self.appSearchController
@@ -86,22 +94,36 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
         appSearchController.searchBar.delegate = self
     }
     
+    fileprivate func prepareForSearch() {
+        activityIndicator.startAnimating()
+        searchResults = [SoftwareResult]()
+        collectionView.reloadData()
+    }
+    
+    fileprivate func endSearch() {
+        DispatchQueue.main.async {
+            self.activityIndicator.stopAnimating()
+            self.collectionView.reloadData()
+        }
+    }
+    
     fileprivate func fetchITunesApps(searchTerm: String) {
-        if searchTerm == "" {
-            appResults = [SoftwareResult]()
+        if searchTerm.isEmpty {
+            searchResults = [SoftwareResult]()
             collectionView.reloadData()
             return
         }
-                
-        ApiService.shared.searchApps(searchTerm: searchTerm, completion: { (searchResults, err) in
+        
+        prepareForSearch()
+        
+        ApiService.shared.searchApps(searchTerm: searchTerm, completion: {
+            (searchResults, err) in
             if let err = err {
                 print("Failed to fetch search results:", err)
-                return
+            } else {
+                self.searchResults = searchResults
             }
-            self.appResults = searchResults
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
-            }
+            self.endSearch()
         })
     }
 }

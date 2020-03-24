@@ -9,7 +9,10 @@
 import UIKit
 
 class AppsPageController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout {
-
+    
+    var activityIndicator = ActivityIndicatorView()
+    var groups = [Feed]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -17,20 +20,26 @@ class AppsPageController: BaseCollectionViewController, UICollectionViewDelegate
         
         collectionView!.register(AppsGroupCell.self, forCellWithReuseIdentifier: appsCollectionViewCellId)
         collectionView!.register(AppsPageHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: appsPageHeaderViewCellId)
+        
+        setupActivityIndicator()
+        
+        fetchData()
 
     }
 
     // MARK: UICollectionViewDataSource
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: appsCollectionViewCellId, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: appsCollectionViewCellId, for: indexPath) as! AppsGroupCell
+        
+        cell.feed = groups[indexPath.item]
     
         return cell
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return 5
+        return groups.count
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -49,5 +58,90 @@ class AppsPageController: BaseCollectionViewController, UICollectionViewDelegate
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return .init(width: view.frame.width, height: 300)
+    }
+    
+    // MARK: - Fileprivate
+    
+     fileprivate func setupActivityIndicator() {
+         view.addSubview(activityIndicator)
+         activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+         activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+     }
+    
+    fileprivate func fetchData() {
+        
+        var appGroupEditorsChoice: Feed?
+        var appGroupTopFree: Feed?
+        var appGroupTopPaid: Feed?
+        var appGroupTopGrossing: Feed?
+        
+        let dispatchGroup = DispatchGroup()
+        
+        activityIndicator.startAnimating()
+        
+        dispatchGroup.enter()
+        ApiService.shared.editorsChoiceApps(completion: { (feed, err) in
+            if let err = err {
+                print("Failed to fetch editor's choice app results:", err)
+            } else {
+                if let appGroup = feed {
+                    appGroupEditorsChoice = appGroup
+                }
+            }
+            dispatchGroup.leave()
+        })
+        
+        dispatchGroup.enter()
+        ApiService.shared.topFreeApps(completion: { (feed, err) in
+            if let err = err {
+                print("Failed to fetch top free apps results:", err)
+            } else {
+                if let appGroup = feed {
+                    appGroupTopFree = appGroup
+                }
+            }
+            dispatchGroup.leave()
+        })
+        
+        dispatchGroup.enter()
+        ApiService.shared.topPaidApps(completion: { (feed, err) in
+            if let err = err {
+                print("Failed to fetch top paid apps results:", err)
+            } else {
+                if let appGroup = feed {
+                    appGroupTopPaid = appGroup
+                }
+            }
+            dispatchGroup.leave()
+        })
+        
+        dispatchGroup.enter()
+        ApiService.shared.topGrossingApps(completion: { (feed, err) in
+            if let err = err {
+                print("Failed to fetch top grossing apps results:", err)
+            } else {
+                if let appGroup = feed {
+                    appGroupTopGrossing = appGroup
+                }
+            }
+            dispatchGroup.leave()
+        })
+        
+        dispatchGroup.notify(queue: .main) {
+            if let appGroup = appGroupEditorsChoice {
+                self.groups.append(appGroup)
+            }
+            if let appGroup = appGroupTopFree {
+                self.groups.append(appGroup)
+            }
+            if let appGroup = appGroupTopPaid {
+                self.groups.append(appGroup)
+            }
+            if let appGroup = appGroupTopGrossing {
+                self.groups.append(appGroup)
+            }
+            self.activityIndicator.stopAnimating()
+            self.collectionView.reloadData()
+        }
     }
 }

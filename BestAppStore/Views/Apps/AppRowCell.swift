@@ -10,11 +10,19 @@ import UIKit
 
 class AppRowCell: UICollectionViewCell {
     
+    var app: AppResult? = nil {
+        didSet {
+            appNameLabel.text = app?.name
+            companyLabel.text = app?.artistName
+            setAppIconImage(app?.artworkUrl100)
+        }
+    }
+    
     let iconImageView: UIImageView = {
         let iv = UIImageView(cornerRadius: appIconCornerRadius)
         iv.widthAnchor.constraint(equalToConstant: appIconWidthHeight).isActive = true
         iv.heightAnchor.constraint(equalToConstant: appIconWidthHeight).isActive = true
-        iv.backgroundColor = .purple
+        iv.backgroundColor = .clear
         return iv
     }()
     
@@ -62,5 +70,14 @@ class AppRowCell: UICollectionViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - Fileprivate
+    
+    fileprivate func setAppIconImage(_ imageUrl: String?) {
+        guard let urlString = imageUrl else { return }
+        guard let url = URL(string: urlString) else { return }
+        
+        iconImageView.sd_setImage(with: url)
     }
 }
