@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AppsPageController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout {
+class AppsController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout {
     
     var groups = [Feed]()
     var socialApps = [SocialApp]()

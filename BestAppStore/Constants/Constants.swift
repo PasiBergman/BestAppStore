@@ -11,7 +11,8 @@ import UIKit
 // TODAY
 let todayBarTitle = "Today"
 let todayTabBarIconName = "today"
-let todayBackgroundColor = UIColor.white
+let todayBackgroundColor = #colorLiteral(red: 0.9489366412, green: 0.9490728974, blue: 0.9489069581, alpha: 1)
+let todayCellId = "todayCell"
 
 
 // APPS

@@ -16,10 +16,10 @@ class BaseTabBarController: UITabBarController {
         view.backgroundColor = .white
         
         // Today
-        let todayNavController = createNavController(UIViewController(), title: todayBarTitle, iconName: todayTabBarIconName)
+        let todayNavController = createNavController(TodayController(), title: todayBarTitle, iconName: todayTabBarIconName)
         
         // Apps
-        let appsNavController = createNavController(AppsPageController(), title: appsBarTitle, iconName: appsTabBarIconName)
+        let appsNavController = createNavController(AppsController(), title: appsBarTitle, iconName: appsTabBarIconName)
         
         // Search
         let searchNavController = createNavController(SearchController(), title: searchBarTitle, iconName: searchTabBarIconName)
@@ -34,12 +34,12 @@ class BaseTabBarController: UITabBarController {
     // MARK: - Fileprivate
     
     fileprivate func createNavController(_ viewController: UIViewController, title: String, iconName: String) -> UINavigationController {
-        viewController.navigationItem.title = title
         let navController = UINavigationController(rootViewController: viewController)
+        viewController.navigationItem.title = title
         navController.tabBarItem.title = title
         navController.tabBarItem.image = UIImage(named: iconName)
         navController.navigationBar.prefersLargeTitles = true
-        
+
         return navController
     }
 }
