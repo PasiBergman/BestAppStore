@@ -25,6 +25,7 @@ class TodayController: BaseCollectionViewController, UICollectionViewDelegateFlo
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
+        // Get the cell which was selected
         guard let selectedCell = collectionView.cellForItem(at: indexPath) else {
             return
         }
@@ -32,13 +33,15 @@ class TodayController: BaseCollectionViewController, UICollectionViewDelegateFlo
         guard let startingFrame = selectedCell.superview?.convert(selectedCell.frame, to: nil) else {
             return
         }
-        let fullScreenView = FullScreenView(frame: startingFrame, endFrame: view.frame, tabBarController: tabBarController)
-        view.addSubview(fullScreenView)
+        let fullScreenController = AppFullScreenController(frame: startingFrame, endFrame: view.frame, tabBarController: tabBarController)
+        view.addSubview(fullScreenController.view)
+        addChild(fullScreenController)
+        fullScreenController.view.frame = startingFrame
         
         UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: .curveEaseOut, animations: {
             
-            fullScreenView.frame = self.view.frame
-            fullScreenView.layer.cornerRadius = 0
+            fullScreenController.view.frame = self.view.frame
+            fullScreenController.view.layer.cornerRadius = 0
             
             self.tabBarController?.tabBar.frame.origin.y = self.view.frame.size.height
             
