@@ -16,47 +16,30 @@ class SearchResultCell: UICollectionViewCell {
             nameLabel.text = softwareResult?.trackName
             categoryLabel.text = softwareResult?.primaryGenreName
             ratingsLabel.text = getFormattedRatingsCount(softwareResult?.userRatingCount)
-            setAppIconImage(softwareResult?.artworkUrl100)
+            appIconImageView.setAppIcon(iconUrl: softwareResult?.artworkUrl100 ?? "")
             setScreenShotImages(softwareResult?.screenshotUrls ?? [])
         }
     }
     
-    let appIconImageView: UIImageView = {
-        let iv = UIImageView(cornerRadius: appIconCornerRadius)
-        iv.backgroundColor = .clear
-        iv.widthAnchor.constraint(equalToConstant: appIconWidthHeight).isActive = true
-        iv.heightAnchor.constraint(equalToConstant: appIconWidthHeight).isActive = true
-        return iv
-    }()
+    let appIconImageView = AppIconImageView(size: appIconWidthHeight, cornerRadius: appIconCornerRadius)
     
     let nameLabel: UILabel = {
-        let label = UILabel()
-        label.text = "APP NAME"
+        let label = UILabel(text: "APP NAME", font: .systemFont(ofSize: 18))
         return label
     }()
     
     let categoryLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Photo & Video"
+        let label = UILabel(text: "Photo & Video", font: .systemFont(ofSize: 16))
         return label
     }()
 
     let ratingsLabel: UILabel = {
-        let label = UILabel()
+        let label = UILabel(text: "2.48M", font: .systemFont(ofSize: 16))
+        label.textColor = .lightGray
         return label
     }()
     
-    let getButton: UIButton = {
-        let  btn = UIButton(type: .system)
-        btn.setTitle("GET", for: .normal)
-        btn.setTitleColor(.blue, for: .normal)
-        btn.titleLabel?.font = .boldSystemFont(ofSize: 14)
-        btn.backgroundColor = getButtonColor
-        btn.layer.cornerRadius = getButtonHeight / 2
-        btn.widthAnchor.constraint(equalToConstant: getButtonWidth).isActive = true
-        btn.heightAnchor.constraint(equalToConstant: getButtonHeight).isActive = true
-        return btn
-    }()
+    let getButton = GetButton(text: "GET", backgroundColor: getButtonColor, textColor: UIColor.blue)
     
     lazy var screenShot1ImageView = self.createScreeShotImgageView()
     lazy var screenShot2ImageView = self.createScreeShotImgageView()
@@ -96,16 +79,14 @@ class SearchResultCell: UICollectionViewCell {
             appIconImageView,
             labelsStackView,
             getButton,
-        ])
-        infoTopStackView.spacing = 12
+        ], spacing: 12)
         infoTopStackView.alignment = .center
         
         let screenShotsStackView = UIStackView(arrangedSubviews: [
             screenShot1ImageView,
             screenShot2ImageView,
             screenShot3ImageView,
-        ])
-        screenShotsStackView.spacing = 12
+        ], spacing: 12)
         screenShotsStackView.distribution = .fillEqually
         
         let overallStackView = VerticalStackView(arrangedSubviews: [
@@ -131,11 +112,6 @@ class SearchResultCell: UICollectionViewCell {
         } else {
             return "0"
         }
-    }
-    
-    fileprivate func setAppIconImage(_ iconUrl: String?) {
-        guard let url = URL(string: iconUrl ?? "") else { return }
-        appIconImageView.sd_setImage(with: url)
     }
     
     fileprivate func setScreenShotImages(_ screenshotUrls: [String]) {

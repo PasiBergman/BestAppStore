@@ -17,7 +17,7 @@ class AppsGroupCell: UICollectionViewCell {
         }
     }
     
-    let appGroupTitleLabel = UILabel(text: "App Section", font: .boldSystemFont(ofSize: 26))
+    let appGroupTitleLabel = UILabel(text: "App Section", font: .boldSystemFont(ofSize: 22))
     
     let horizontalController = AppsHorizontalController()
     
@@ -27,10 +27,10 @@ class AppsGroupCell: UICollectionViewCell {
         backgroundColor = .white
         
         addSubview(appGroupTitleLabel)
-        appGroupTitleLabel.anchor(top: topAnchor, leading: leadingAnchor, bottom: nil, trailing: trailingAnchor, padding: .init(top: 0, left: 16, bottom: 0, right: 16))
+        appGroupTitleLabel.anchor(top: topAnchor, leading: leadingAnchor, bottom: nil, trailing: trailingAnchor, padding: .init(top: horizontalScollLeftRightPadding, left: horizontalScollLeftRightPadding, bottom: 0, right: horizontalScollLeftRightPadding))
         
         addSubview(horizontalController.view)
-        horizontalController.view.anchor(top: appGroupTitleLabel.bottomAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 0, left: 0, bottom: 0, right: 0))
+        horizontalController.view.anchor(top: appGroupTitleLabel.bottomAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 8, left: 0, bottom: 0, right: 0))
         
     }
     

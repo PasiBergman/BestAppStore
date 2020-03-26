@@ -11,7 +11,6 @@ import UIKit
 class SearchController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout, UISearchBarDelegate {
     
     var searchResults = [SoftwareResult]()
-    var activityIndicator = ActivityIndicatorView()
     
     fileprivate let appSearchController = UISearchController(searchResultsController: nil)
     
@@ -30,7 +29,6 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
         collectionView.register(SearchResultCell.self, forCellWithReuseIdentifier: searchCollectionViewCellId)
         
         setupSearchResultLabel()
-        setupActivityIndicator()
         setupSearchBar()
     }
     
@@ -55,24 +53,12 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
         noSearchResultsLabel.isHidden = searchResults.count != 0 || activityIndicator.isAnimating
         return searchResults.count
     }
-    
-//    override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-//        print("scrollViewWillBeginDragging")
-//        let searchText = appSearchController.searchBar.text
-//        appSearchController.isActive = false
-//        appSearchController.searchBar.text = searchText
-//    }
 
     // MARK: - Fileprivate
     
     fileprivate func setupSearchResultLabel() {
         view.addSubview(noSearchResultsLabel)
         noSearchResultsLabel.fillSuperview()
-    }
-    
-    fileprivate func setupActivityIndicator() {
-        view.addSubview(activityIndicator)
-        activityIndicator.fillSuperview()
     }
     
     fileprivate func setupSearchBar() {
@@ -110,8 +96,8 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
             if let err = err {
                 print("Failed to fetch search results:", err)
             } else {
-                if let searchResults = data {
-                    self.searchResults = searchResults
+                if let res = data?.results {
+                    self.searchResults = res
                 }
             }
             self.endSearch()

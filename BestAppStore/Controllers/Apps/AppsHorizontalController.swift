@@ -19,6 +19,8 @@ class AppsHorizontalController: HorizontalSnappingController, UICollectionViewDe
         }
     }
     
+    var didSelectItemHandler: ((AppResult) -> ())?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.backgroundColor = .white
@@ -26,6 +28,12 @@ class AppsHorizontalController: HorizontalSnappingController, UICollectionViewDe
         collectionView.register(AppRowCell.self, forCellWithReuseIdentifier: appsHorizontalCollectionViewCellId)
         
         collectionView.contentInset = .init(top: 0, left: horizontalScollLeftRightPadding, bottom: 0, right: horizontalScollLeftRightPadding)
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let app = apps[indexPath.item]
+        
+        didSelectItemHandler?(app)
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

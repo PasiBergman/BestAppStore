@@ -13,9 +13,9 @@ class ApiService {
     // Singleton
     static let shared = ApiService()
     
-    func searchApps(searchTerm: String, completion: @escaping ([SoftwareResult]?, Error?) -> ()) {
+    func searchApps(searchTerm: String, completion: @escaping (SearchResult?, Error?) -> ()) {
         guard let encodedSearchTerm = searchTerm.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
-            completion([], nil)
+            completion(nil, URLError(.unsupportedURL))
             return
         }
         let urlString = "https://itunes.apple.com/search?term=\(encodedSearchTerm)&entity=software"
@@ -48,6 +48,23 @@ class ApiService {
         fetchGenericJsonData(urlString: urlString, completion: completion)
     }
     
+    func fetchAppDetails(appId: String, completion: @escaping (SearchResult?, Error?) -> ()) {
+        if appId.isEmpty {
+            completion(nil, URLError(.unsupportedURL))
+            return
+        }
+        let urlString = "https://itunes.apple.com/lookup?id=\(appId)"
+        fetchGenericJsonData(urlString: urlString, completion: completion)
+    }
+    
+    func fetchAppRevies(appId: String, completion: @escaping (ReviewsData?, Error?) -> ()) {
+        if appId.isEmpty {
+            completion(nil, URLError(.unsupportedURL))
+            return
+        }
+        let urlString = "https://itunes.apple.com/rss/customerreviews/page=1/id=\(appId)/sortby=mostrecent/json?l=en&cc=us"
+        fetchGenericJsonData(urlString: urlString, completion: completion)
+    }
     
     fileprivate func fetchGenericJsonData<T: Decodable>(urlString: String, completion: @escaping (T?, Error?) -> ()) {
         guard let url = URL(string: urlString) else { return }

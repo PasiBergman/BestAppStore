@@ -13,6 +13,7 @@ let todayBarTitle = "Today"
 let todayTabBarIconName = "today"
 let todayBackgroundColor = UIColor.white
 
+
 // APPS
 let appsBarTitle = "Apps"
 let appsTabBarIconName = "apps"
@@ -26,8 +27,23 @@ let appIconWidthHeight: CGFloat = 64
 let getButtonWidth: CGFloat = 80
 let getButtonHeight: CGFloat = 32
 let getButtonColor = UIColor(white: 0.95, alpha: 1)
-let horizontalScollLeftRightPadding: CGFloat = 16
+let getButtonTextColor = UIColor.blue
+let horizontalScollLeftRightPadding: CGFloat = 20
 let horizontalScrollPeakNextDeduction: CGFloat = 12
+
+
+// APP DETAILS
+let appDetailCellId = "appDetailCell"
+let appDetailPreviewCellId = "appDetailPreviewCell"
+let appDetailScreenshotCellId = "appDetailScreenshotCell"
+let appDetailReviewRowCellId = "appDetailReviewRowCell"
+let appDetailReviewCellId = "appDetailReviewCell"
+let appDetailIconWidthHeight: CGFloat = 128
+let appDetailIconCornerRadius: CGFloat = 24
+let appDetailScreenshotWidth: CGFloat = 250
+// let appDetailScreenshotHeight: CGFloat = 399
+let appDetailScreenshotCornerRadius: CGFloat = 12
+let appDetailReviewWidth: CGFloat = 300
 
 
 // SEARCH

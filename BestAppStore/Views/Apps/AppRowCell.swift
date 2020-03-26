@@ -14,39 +14,18 @@ class AppRowCell: UICollectionViewCell {
         didSet {
             appNameLabel.text = app?.name
             companyLabel.text = app?.artistName
-            setAppIconImage(app?.artworkUrl100)
+            appIconImageView.setAppIcon(iconUrl: app?.artworkUrl100 ?? "")
         }
     }
     
-    let iconImageView: UIImageView = {
-        let iv = UIImageView(cornerRadius: appIconCornerRadius)
-        iv.widthAnchor.constraint(equalToConstant: appIconWidthHeight).isActive = true
-        iv.heightAnchor.constraint(equalToConstant: appIconWidthHeight).isActive = true
-        iv.backgroundColor = .clear
-        return iv
-    }()
-    
-    let appNameLabel: UILabel = {
-        let label = UILabel(text: "App Name", font: .systemFont(ofSize: 20))
-        return label
-    }()
-    
+    let appIconImageView = AppIconImageView(size: appIconWidthHeight, cornerRadius: appIconCornerRadius)
+    let appNameLabel = UILabel(text: "App Name", font: .systemFont(ofSize: 18), numberOfLines: 2)
     let companyLabel: UILabel = {
         let label = UILabel(text: "Company Name", font: .systemFont(ofSize: 13))
         label.textColor = .lightGray
         return label
     }()
-    
-    let getButton: UIButton = {
-        let btn = UIButton(title: "GET")
-        btn.widthAnchor.constraint(equalToConstant: getButtonWidth).isActive = true
-        btn.heightAnchor.constraint(equalToConstant: getButtonHeight).isActive = true
-        btn.backgroundColor = getButtonColor
-        btn.layer.cornerRadius = getButtonHeight / 2
-        btn.clipsToBounds = true
-        btn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
-        return btn
-    }()
+    let getButton = GetButton(text: "GET", backgroundColor: getButtonColor, textColor: getButtonTextColor)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -57,13 +36,13 @@ class AppRowCell: UICollectionViewCell {
         ])
         
         let stackView = UIStackView(arrangedSubviews: [
-            iconImageView,
+            appIconImageView,
             labelsStackView,
             getButton
         ])
         stackView.spacing = 16
         stackView.alignment = .center
-        
+
         addSubview(stackView)
         stackView.fillSuperview()
     }
@@ -73,11 +52,5 @@ class AppRowCell: UICollectionViewCell {
     }
     
     // MARK: - Fileprivate
-    
-    fileprivate func setAppIconImage(_ imageUrl: String?) {
-        guard let urlString = imageUrl else { return }
-        guard let url = URL(string: urlString) else { return }
-        
-        iconImageView.sd_setImage(with: url)
-    }
+
 }

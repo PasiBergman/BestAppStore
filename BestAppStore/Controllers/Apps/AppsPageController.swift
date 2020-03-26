@@ -10,7 +10,6 @@ import UIKit
 
 class AppsPageController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout {
     
-    var activityIndicator = ActivityIndicatorView()
     var groups = [Feed]()
     var socialApps = [SocialApp]()
     
@@ -22,8 +21,6 @@ class AppsPageController: BaseCollectionViewController, UICollectionViewDelegate
         collectionView!.register(AppsGroupCell.self, forCellWithReuseIdentifier: appsCollectionViewCellId)
         collectionView!.register(AppsPageHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: appsPageHeaderViewCellId)
         
-        setupActivityIndicator()
-        
         fetchData()
 
     }
@@ -34,12 +31,18 @@ class AppsPageController: BaseCollectionViewController, UICollectionViewDelegate
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: appsCollectionViewCellId, for: indexPath) as! AppsGroupCell
         
         cell.feed = groups[indexPath.item]
+        cell.horizontalController.didSelectItemHandler = { [weak self] app in
+            let appDetailController = AppDetailController()
+            appDetailController.navigationItem.title = app.name
+            appDetailController.appId = app.id
+            self?.navigationController?.pushViewController(appDetailController, animated: true)
+        }
     
         return cell
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
+
         return groups.count
     }
     
@@ -64,11 +67,6 @@ class AppsPageController: BaseCollectionViewController, UICollectionViewDelegate
     }
     
     // MARK: - Fileprivate
-    
-    fileprivate func setupActivityIndicator() {
-        view.addSubview(activityIndicator)
-        activityIndicator.fillSuperview()
-    }
     
     fileprivate func fetchData() {
         
