@@ -10,7 +10,11 @@ import UIKit
 
 class AppDetailReviewsController: HorizontalSnappingController, UICollectionViewDelegateFlowLayout {
     
-    var appReviews = [ReviewEntry]()
+    var appReviews = [ReviewEntry]() {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

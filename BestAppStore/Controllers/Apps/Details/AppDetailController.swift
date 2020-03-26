@@ -110,6 +110,8 @@ class AppDetailController: BaseCollectionViewController, UICollectionViewDelegat
             } else {
                 if let res = data?.feed.entry {
                     self.appReviews = res
+                } else {
+                    self.appReviews = [ReviewEntry]()
                 }
             }
             dispatchGroup.leave()

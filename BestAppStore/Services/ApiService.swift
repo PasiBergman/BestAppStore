@@ -67,7 +67,11 @@ class ApiService {
     }
     
     fileprivate func fetchGenericJsonData<T: Decodable>(urlString: String, completion: @escaping (T?, Error?) -> ()) {
-        guard let url = URL(string: urlString) else { return }
+        guard let url = URL(string: urlString) else {
+            print("Unsupported url: \(urlString)")
+            completion(nil, URLError(.unsupportedURL))
+            return
+        }
         
         URLSession.shared.dataTask(with: url) { (data, resp, err) in
             if let err = err {
@@ -76,6 +80,7 @@ class ApiService {
             }
             
             guard let data = data else {
+                print("Invalid data in fetchGenericJsonData for \(urlString) - response:", resp)
                 completion(nil, nil)
                 return
             }

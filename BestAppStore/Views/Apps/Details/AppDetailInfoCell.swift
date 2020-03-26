@@ -23,7 +23,7 @@ class AppDetailInfoCell: UICollectionViewCell {
     let nameLabel = UILabel(text: "Application Detail Title", font: .boldSystemFont(ofSize: 24), numberOfLines: 2)
     let priceButton = GetButton(text: "Free", backgroundColor: #colorLiteral(red: 0.1659104228, green: 0.4678452015, blue: 0.9698354602, alpha: 1), textColor: .white)
     let whatsNewLabel = UILabel(text: "What's New", font: .boldSystemFont(ofSize: 22))
-    let releaseNotesLabel = UILabel(text: "1.More emoticons \n2.Send iMessage & MMS much more easier", font: .systemFont(ofSize: 18), numberOfLines: 0)
+    let releaseNotesLabel = UILabel(text: "1.More emoticons \n2.Send iMessage & MMS much more easier", font: .systemFont(ofSize: 16), numberOfLines: 0)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
