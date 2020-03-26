@@ -33,8 +33,8 @@ class AppFullScreenHeaderCell: UITableViewCell {
         closeButton.addTarget(self, action: #selector(closeButtonClicked), for: .touchDown)
     }
     
-    @objc func closeButtonClicked() {
-        closeButton.isHidden = true
+    @objc fileprivate func closeButtonClicked(button: UIButton) {
+        button.isHidden = true
         didClickCloseButton?()
     }
     

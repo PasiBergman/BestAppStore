@@ -31,9 +31,9 @@ class AppFullScreenController: UITableViewController {
         
         tableView.tableFooterView = UIView()
         tableView.separatorStyle = .none
+        tableView.allowsSelection = false
         
         tableView.layer.cornerRadius = todayCellCornerRadius
-        tableView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleFullViewTap)))
         
         annimateViewFromCellToFullScreen()
     }
@@ -49,10 +49,6 @@ class AppFullScreenController: UITableViewController {
             self.todayTabBarController?.tabBar.frame.origin.y = self.fullScreenFrame.size.height
 
         }, completion: nil)
-    }
-    
-    @objc func handleFullViewTap(gesture: UITapGestureRecognizer) {
-        // animateViewFromFullScreenToCell()
     }
     
     func animateViewFromFullScreenToCell() {
