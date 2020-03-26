@@ -24,7 +24,21 @@ class TodayController: BaseCollectionViewController, UICollectionViewDelegateFlo
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("Selected today item number \(indexPath.item)")
+        
+        guard let selectedCell = collectionView.cellForItem(at: indexPath) else {
+            return
+        }
+        // Get absolute coordinates (frame) of the selected cell
+        guard let startingFrame = selectedCell.superview?.convert(selectedCell.frame, to: nil) else {
+            return
+        }
+        let fullScreenView = FullScreenView(frame: startingFrame)
+        view.addSubview(fullScreenView)
+        
+        UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: .curveEaseOut, animations: {
+            fullScreenView.frame = self.view.frame
+            fullScreenView.layer.cornerRadius = 0
+        }, completion: nil)
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -39,7 +53,7 @@ class TodayController: BaseCollectionViewController, UICollectionViewDelegateFlo
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        return .init(width: collectionView.frame.width - (3 * horizontalScollLeftRightPadding), height: 450)
+        return .init(width: collectionView.frame.width - (2 * horizontalScollLeftRightPadding), height: 450)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -47,6 +61,6 @@ class TodayController: BaseCollectionViewController, UICollectionViewDelegateFlo
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 32
+        return 28
     }
 }
