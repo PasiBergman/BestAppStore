@@ -32,12 +32,16 @@ class TodayController: BaseCollectionViewController, UICollectionViewDelegateFlo
         guard let startingFrame = selectedCell.superview?.convert(selectedCell.frame, to: nil) else {
             return
         }
-        let fullScreenView = FullScreenView(frame: startingFrame)
+        let fullScreenView = FullScreenView(frame: startingFrame, endFrame: view.frame, tabBarController: tabBarController)
         view.addSubview(fullScreenView)
         
         UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: .curveEaseOut, animations: {
+            
             fullScreenView.frame = self.view.frame
             fullScreenView.layer.cornerRadius = 0
+            
+            self.tabBarController?.tabBar.frame.origin.y = self.view.frame.size.height
+            
         }, completion: nil)
     }
     

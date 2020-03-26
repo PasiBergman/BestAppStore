@@ -10,11 +10,18 @@ import UIKit
 
 class FullScreenView: UIView {
     
-    fileprivate let initialFrame: CGRect
+    fileprivate var initialFrame: CGRect?
+    fileprivate var tabBarCtr: UITabBarController?
+    fileprivate var viewFullFrame: CGRect?
+    
+    convenience init(frame: CGRect, endFrame: CGRect, tabBarController: UITabBarController?) {
+        self.init(frame: frame)
+        initialFrame = frame
+        tabBarCtr = tabBarController
+        viewFullFrame = endFrame
+    }
     
     override init(frame: CGRect) {
-        initialFrame = frame
-
         super.init(frame: frame)
         backgroundColor = .red
         
@@ -26,8 +33,12 @@ class FullScreenView: UIView {
     @objc func handleFullViewTap(gesture: UITapGestureRecognizer) {
         
         UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: .curveEaseOut, animations: {
-            self.frame = self.initialFrame
+            self.frame = self.initialFrame!
             self.layer.cornerRadius = todayCellCornerRadius
+            if let tabBarFrame = self.tabBarCtr?.tabBar.frame,
+               let fullHeight = self.viewFullFrame?.size.height {
+                self.tabBarCtr?.tabBar.frame.origin.y = fullHeight - tabBarFrame.height
+            }
         }, completion: { _ in
             gesture.view?.removeFromSuperview()
         })
