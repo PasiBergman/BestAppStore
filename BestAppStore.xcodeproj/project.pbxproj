@@ -42,6 +42,7 @@
 		3F8FC910242B20E1006C13D8 /* GetButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8FC90F242B20E1006C13D8 /* GetButton.swift */; };
 		3F8FC912242B235E006C13D8 /* AppIconImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8FC911242B235E006C13D8 /* AppIconImageView.swift */; };
 		3F8FC914242B28DB006C13D8 /* Extensions+UIStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8FC913242B28DB006C13D8 /* Extensions+UIStackView.swift */; };
+		3F95FFE5242D7006001C7E0A /* AppFullScreenHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F95FFE4242D7006001C7E0A /* AppFullScreenHeaderCell.swift */; };
 		3FAEC4C6242C9565006B07D6 /* AppFullScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FAEC4C5242C9565006B07D6 /* AppFullScreenController.swift */; };
 		3FC316BB242B591200C84097 /* AppDetailPreviewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC316BA242B591200C84097 /* AppDetailPreviewsCell.swift */; };
 		3FC316BD242B5C9800C84097 /* AppDetailPreviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC316BC242B5C9800C84097 /* AppDetailPreviewController.swift */; };
@@ -93,6 +94,7 @@
 		3F8FC90F242B20E1006C13D8 /* GetButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetButton.swift; sourceTree = "<group>"; };
 		3F8FC911242B235E006C13D8 /* AppIconImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIconImageView.swift; sourceTree = "<group>"; };
 		3F8FC913242B28DB006C13D8 /* Extensions+UIStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extensions+UIStackView.swift"; sourceTree = "<group>"; };
+		3F95FFE4242D7006001C7E0A /* AppFullScreenHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFullScreenHeaderCell.swift; sourceTree = "<group>"; };
 		3FAEC4C5242C9565006B07D6 /* AppFullScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFullScreenController.swift; sourceTree = "<group>"; };
 		3FC316BA242B591200C84097 /* AppDetailPreviewsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDetailPreviewsCell.swift; sourceTree = "<group>"; };
 		3FC316BC242B5C9800C84097 /* AppDetailPreviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDetailPreviewController.swift; sourceTree = "<group>"; };
@@ -305,6 +307,7 @@
 			children = (
 				3FE1E9EA242C7A58003571EA /* TodayCell.swift */,
 				3F616675242CB65D00362229 /* AppFullScreenDescriptionCell.swift */,
+				3F95FFE4242D7006001C7E0A /* AppFullScreenHeaderCell.swift */,
 			);
 			path = Today;
 			sourceTree = "<group>";
@@ -404,6 +407,7 @@
 				3FC316C9242B976B00C84097 /* SpacerView.swift in Sources */,
 				3FC316C5242B890B00C84097 /* AppDetailReviewsController.swift in Sources */,
 				3F8C41412429CF24004CA1B1 /* FeedResult.swift in Sources */,
+				3F95FFE5242D7006001C7E0A /* AppFullScreenHeaderCell.swift in Sources */,
 				3F88085C2427708D00B80590 /* SceneDelegate.swift in Sources */,
 				3F8C413D2429B8C0004CA1B1 /* AppsHeaderHorizontalController.swift in Sources */,
 				3FC316BD242B5C9800C84097 /* AppDetailPreviewController.swift in Sources */,

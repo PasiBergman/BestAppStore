@@ -52,7 +52,14 @@ class AppFullScreenController: UITableViewController {
     }
     
     @objc func handleFullViewTap(gesture: UITapGestureRecognizer) {
+        // animateViewFromFullScreenToCell()
+    }
+    
+    func animateViewFromFullScreenToCell() {
         UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: .curveEaseOut, animations: {
+            
+            self.tableView.scrollToRow(at: [0,0], at: .top, animated: true)
+            
             self.view.frame = self.initialFrame
             self.view.layer.cornerRadius = todayCellCornerRadius
             let fullHeight = self.fullScreenFrame.size.height
@@ -60,7 +67,7 @@ class AppFullScreenController: UITableViewController {
                 self.todayTabBarController?.tabBar.frame.origin.y = fullHeight - tabBarFrame.height
             }
         }, completion: { _ in
-            gesture.view?.removeFromSuperview()
+            self.view.removeFromSuperview()
             self.removeFromParent()
         })
     }
@@ -72,16 +79,11 @@ class AppFullScreenController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.row == 0 {
-            let cell = UITableViewCell()
-            cell.backgroundColor = .white
-            let todayCell = TodayCell()
-            cell.addSubview(todayCell)
-            todayCell.translatesAutoresizingMaskIntoConstraints = false
-            todayCell.widthAnchor.constraint(equalToConstant: 250).isActive = true
-            todayCell.heightAnchor.constraint(equalToConstant: 250).isActive = true
-            todayCell.centerYAnchor.constraint(equalTo: cell.centerYAnchor).isActive = true
-            todayCell.centerXAnchor.constraint(equalTo: cell.centerXAnchor).isActive = true
-            return cell
+            let firstRowCell = AppFullScreenHeaderCell()
+            firstRowCell.didClickCloseButton = { [weak self] in
+                self?.animateViewFromFullScreenToCell()
+            }
+            return firstRowCell
         }
         
         let cell = AppFullScreenDescriptionCell(style: .default, reuseIdentifier: appFullScreenDescripitionCellId)
