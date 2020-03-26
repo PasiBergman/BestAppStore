@@ -15,7 +15,7 @@ let todayBackgroundColor = #colorLiteral(red: 0.9489366412, green: 0.9490728974,
 let todayCellId = "todayCell"
 let todayCellCornerRadius: CGFloat = 16
 let todayCellHeight: CGFloat = 450
-
+let appFullScreenDescripitionCellId = "appFullScreenDescripitionCell"
 
 // APPS
 let appsBarTitle = "Apps"
