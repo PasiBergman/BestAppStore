@@ -32,6 +32,20 @@ class AppFullScreenController: UITableViewController {
         tableView.layer.cornerRadius = todayCellCornerRadius
         tableView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleFullViewTap)))
         
+        annimateViewFromCellToFullScreen()
+    }
+    
+    fileprivate func annimateViewFromCellToFullScreen() {
+        self.view.frame = initialFrame
+        
+        UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: .curveEaseOut, animations: {
+
+            self.view.frame = self.fullScreenFrame
+            self.view.layer.cornerRadius = 0
+
+            self.todayTabBarController?.tabBar.frame.origin.y = self.fullScreenFrame.size.height
+
+        }, completion: nil)
     }
     
     @objc func handleFullViewTap(gesture: UITapGestureRecognizer) {
@@ -46,5 +60,9 @@ class AppFullScreenController: UITableViewController {
             gesture.view?.removeFromSuperview()
             self.removeFromParent()
         })
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return todayCellHeight
     }
 }

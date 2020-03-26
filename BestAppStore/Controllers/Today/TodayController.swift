@@ -33,19 +33,9 @@ class TodayController: BaseCollectionViewController, UICollectionViewDelegateFlo
         guard let startingFrame = selectedCell.superview?.convert(selectedCell.frame, to: nil) else {
             return
         }
-        let fullScreenController = AppFullScreenController(frame: startingFrame, endFrame: view.frame, tabBarController: tabBarController)
-        view.addSubview(fullScreenController.view)
-        addChild(fullScreenController)
-        fullScreenController.view.frame = startingFrame
-        
-        UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: .curveEaseOut, animations: {
-            
-            fullScreenController.view.frame = self.view.frame
-            fullScreenController.view.layer.cornerRadius = 0
-            
-            self.tabBarController?.tabBar.frame.origin.y = self.view.frame.size.height
-            
-        }, completion: nil)
+        let appFullScreenController = AppFullScreenController(frame: startingFrame, endFrame: view.frame, tabBarController: tabBarController)
+        view.addSubview(appFullScreenController.view)
+        addChild(appFullScreenController)
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -60,7 +50,7 @@ class TodayController: BaseCollectionViewController, UICollectionViewDelegateFlo
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        return .init(width: collectionView.frame.width - (2 * horizontalScollLeftRightPadding), height: 450)
+        return .init(width: collectionView.frame.width - (2 * horizontalScollLeftRightPadding), height: todayCellHeight)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
