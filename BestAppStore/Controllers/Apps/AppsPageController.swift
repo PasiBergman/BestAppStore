@@ -32,9 +32,7 @@ class AppsPageController: BaseCollectionViewController, UICollectionViewDelegate
         
         cell.feed = groups[indexPath.item]
         cell.horizontalController.didSelectItemHandler = { [weak self] app in
-            let appDetailController = AppDetailController()
-            appDetailController.navigationItem.title = app.name
-            appDetailController.appId = app.id
+            let appDetailController = AppDetailController(appId: app.id, appTitle: app.name)
             self?.navigationController?.pushViewController(appDetailController, animated: true)
         }
     

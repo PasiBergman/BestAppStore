@@ -56,8 +56,7 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
 
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        let appDetailController = AppDetailController()
-        appDetailController.appId = "\(searchResults[indexPath.item].trackId)"
+        let appDetailController = AppDetailController(appId: "\(searchResults[indexPath.item].trackId)", appTitle: "\(searchResults[indexPath.item].trackName)")
         navigationController?.pushViewController(appDetailController, animated: true)
     }
     // MARK: - Fileprivate

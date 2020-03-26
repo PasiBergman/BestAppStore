@@ -10,16 +10,18 @@ import UIKit
 
 class AppDetailController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout {
     
-    var appId: String! {
-        didSet {
-            fetchAppDetails(appId: appId)
-        }
-    }
-    
+    fileprivate let appId: String
+    fileprivate let appTitle: String
     var appData = [SoftwareResult]()
     var appReviews = [ReviewEntry]()
     
     let cellsPerApp: Int = 3
+    
+    init(appId: String, appTitle: String) {
+        self.appId = appId
+        self.appTitle = appTitle
+        super.init()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +33,10 @@ class AppDetailController: BaseCollectionViewController, UICollectionViewDelegat
         collectionView.register(AppDetailReviewRowCell.self, forCellWithReuseIdentifier: appDetailReviewRowCellId)
         
         navigationItem.largeTitleDisplayMode = .never
+        
+        navigationItem.title = appTitle
+        
+        fetchAppDetails(appId: appId)
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -113,5 +119,9 @@ class AppDetailController: BaseCollectionViewController, UICollectionViewDelegat
             self.activityIndicator.stopAnimating()
             self.collectionView.reloadData()
         }
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }

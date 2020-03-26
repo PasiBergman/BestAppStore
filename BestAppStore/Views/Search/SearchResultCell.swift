@@ -34,7 +34,7 @@ class SearchResultCell: UICollectionViewCell {
     }()
 
     let ratingsLabel: UILabel = {
-        let label = UILabel(text: "2.48M", font: .systemFont(ofSize: 16))
+        let label = UILabel(text: "2.48M", font: .systemFont(ofSize: 14))
         label.textColor = .lightGray
         return label
     }()
@@ -73,7 +73,7 @@ class SearchResultCell: UICollectionViewCell {
             nameLabel,
             categoryLabel,
             ratingsLabel,
-        ])
+        ], spacing: 4)
         
         let infoTopStackView = UIStackView(arrangedSubviews: [
             appIconImageView,
