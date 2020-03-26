@@ -54,6 +54,12 @@ class SearchController: BaseCollectionViewController, UICollectionViewDelegateFl
         return searchResults.count
     }
 
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let appDetailController = AppDetailController()
+        appDetailController.appId = "\(searchResults[indexPath.item].trackId)"
+        navigationController?.pushViewController(appDetailController, animated: true)
+    }
     // MARK: - Fileprivate
     
     fileprivate func setupSearchResultLabel() {
