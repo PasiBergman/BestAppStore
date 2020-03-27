@@ -10,24 +10,8 @@ import UIKit
 
 class AppFullScreenController: UITableViewController {
     
-    internal let initialFrame: CGRect
-    internal let fullScreenFrame: CGRect
-    internal let todayTabBarController: UITabBarController?
-    internal let collectionView: UICollectionView?
-    internal let todayItem: TodayItem?
-    
-    init(frame: CGRect, endFrame: CGRect, tabBarController: UITabBarController?, collectionView: UICollectionView, todayItem: TodayItem) {
-        self.initialFrame = frame
-        self.todayTabBarController = tabBarController
-        self.collectionView = collectionView
-        self.fullScreenFrame = endFrame
-        self.todayItem = todayItem
-        super.init(style: .plain)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    var handleCloseViewClick: (() -> ())?
+    var todayItem: TodayItem?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,47 +25,8 @@ class AppFullScreenController: UITableViewController {
         tableView.layer.cornerRadius = todayCellCornerRadius
         
         let statusBarHeight = UIApplication.shared.windows.filter({$0.isKeyWindow}).first?.windowScene?.statusBarManager?.statusBarFrame ?? CGRect.zero
+        
         tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: statusBarHeight.height, right: 0)
-        
-        animateViewFromCellToFullScreen()
-    }
-    
-        
-    fileprivate func animateViewFromCellToFullScreen() {
-        self.view.frame = initialFrame
-        
-        UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: .curveEaseOut, animations: {
-
-            self.view.frame = self.fullScreenFrame
-            self.view.layer.cornerRadius = 0
-
-            self.todayTabBarController?.tabBar.frame.origin.y = self.fullScreenFrame.size.height
-            
-            guard let headerCell = self.tableView.cellForRow(at: [0,0]) as? AppFullScreenHeaderCell else { return }
-            headerCell.todayCell.layoutIfNeeded()
-
-        }, completion: nil)
-    }
-    
-    func animateViewFromFullScreenToCell() {
-        UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.7, options: .curveEaseOut, animations: {
-            
-            self.tableView.scrollToRow(at: [0,0], at: .top, animated: true)
-            
-            self.view.frame = self.initialFrame
-            self.view.layer.cornerRadius = todayCellCornerRadius
-            let fullHeight = self.fullScreenFrame.size.height
-            if let tabBarFrame = self.todayTabBarController?.tabBar.frame {
-                self.todayTabBarController?.tabBar.frame.origin.y = fullHeight - tabBarFrame.height
-            }
-            guard let headerCell = self.tableView.cellForRow(at: [0,0]) as? AppFullScreenHeaderCell else { return }
-            headerCell.layoutIfNeeded()
-            
-        }, completion: { _ in
-            self.view.removeFromSuperview()
-            self.removeFromParent()
-            self.collectionView?.isUserInteractionEnabled = true
-        })
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -93,9 +38,7 @@ class AppFullScreenController: UITableViewController {
         if indexPath.row == 0 {
             let firstRowCell = AppFullScreenHeaderCell()
             firstRowCell.todayCell.todayItem = todayItem
-            firstRowCell.didClickCloseButton = { [weak self] in
-                self?.animateViewFromFullScreenToCell()
-            }
+            firstRowCell.didClickCloseButton = handleCloseViewClick
             return firstRowCell
         }
         
@@ -111,7 +54,7 @@ class AppFullScreenController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 0 {
-            return 494
+            return 450
         }
         return super.tableView(tableView, heightForRowAt: indexPath)
     }

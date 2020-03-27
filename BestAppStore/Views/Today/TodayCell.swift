@@ -51,7 +51,9 @@ class TodayCell: UICollectionViewCell {
         ], spacing: 8)
         
         addSubview(verticalStackView)
-        verticalStackView.anchor(top: safeAreaLayoutGuide.topAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 24, left: 24, bottom: 24, right: 24))
+        verticalStackView.anchor(top: nil, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 24, left: 24, bottom: 24, right: 24))
+        topConstraint = verticalStackView.topAnchor.constraint(equalTo: topAnchor, constant: 24)
+        topConstraint?.isActive = true
     }
     
     required init?(coder: NSCoder) {
