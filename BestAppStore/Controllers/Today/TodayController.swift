@@ -10,6 +10,11 @@ import UIKit
 
 class TodayController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout {
     
+    let todayItems = [
+        TodayItem.init(category: "LIFE HACK", title: "Utilizing your Time", image: #imageLiteral(resourceName: "garden"), description: "All the tools and apps you need to intelligentry organize your life the right way.", backgroundColor: .white),
+        TodayItem.init(category: "HOLIDAYS", title: "Travel on a Budget", image: #imageLiteral(resourceName: "holiday"), description: "Find out all you need to know on how to travel without packing everything.", backgroundColor: #colorLiteral(red: 0.9746602178, green: 0.9583788514, blue: 0.7279261351, alpha: 1)),
+    ]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -33,17 +38,22 @@ class TodayController: BaseCollectionViewController, UICollectionViewDelegateFlo
         guard let startingFrame = selectedCell.superview?.convert(selectedCell.frame, to: nil) else {
             return
         }
-        let appFullScreenController = AppFullScreenController(frame: startingFrame, endFrame: view.frame, tabBarController: tabBarController)
+        let appFullScreenController = AppFullScreenController(frame: startingFrame, endFrame: view.frame, tabBarController: tabBarController, collectionView: collectionView, todayItem: todayItems[indexPath.row])
+        
+        collectionView.isUserInteractionEnabled = false
+        
         view.addSubview(appFullScreenController.view)
         addChild(appFullScreenController)
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return todayItems.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: todayCellId, for: indexPath) as! TodayCell
+        
+        cell.todayItem = todayItems[indexPath.row]
         
         return cell
     }

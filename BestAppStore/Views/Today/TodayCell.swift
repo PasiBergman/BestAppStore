@@ -10,12 +10,26 @@ import UIKit
 
 class TodayCell: UICollectionViewCell {
     
+    
+    var todayItem: TodayItem? {
+        didSet {
+            categoryLabel.text = todayItem?.category
+            titleLabel.text = todayItem?.title
+            descriptionLabel.text = todayItem?.description
+            todayImageView.image = todayItem?.image
+            backgroundColor = todayItem?.backgroundColor
+        }
+    }
+    
+    var topConstraint: NSLayoutConstraint?
+    let categoryLabel = UILabel(text: "LIFE HACK", font: .boldSystemFont(ofSize: 20))
+    let titleLabel = UILabel(text: "Utilizing your Time", font: .boldSystemFont(ofSize: 24))
+    let descriptionLabel = UILabel(text: "All the tools and apps you need to intelligentry organize your life the right way.", font: .systemFont(ofSize: 16), numberOfLines: 3)
+    
     let todayImageView: UIImageView = {
         let iv = UIImageView(image: #imageLiteral(resourceName: "garden"))
-        iv.translatesAutoresizingMaskIntoConstraints = false
-        iv.widthAnchor.constraint(equalToConstant: 250).isActive = true
-        iv.heightAnchor.constraint(equalToConstant: 250).isActive = true
         iv.contentMode = .scaleAspectFill
+        iv.clipsToBounds = true
         return iv
     }()
     
@@ -25,9 +39,19 @@ class TodayCell: UICollectionViewCell {
         layer.cornerRadius = todayCellCornerRadius
         backgroundColor = .white
         
-        addSubview(todayImageView)
-        todayImageView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-        todayImageView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        let containerView = UIView()
+        containerView.addSubview(todayImageView)
+        todayImageView.centerInSuperview(size: .init(width: 240, height: 240))
+        
+        let verticalStackView = VerticalStackView(arrangedSubviews: [
+            categoryLabel,
+            titleLabel,
+            containerView,
+            descriptionLabel
+        ], spacing: 8)
+        
+        addSubview(verticalStackView)
+        verticalStackView.anchor(top: safeAreaLayoutGuide.topAnchor, leading: leadingAnchor, bottom: bottomAnchor, trailing: trailingAnchor, padding: .init(top: 24, left: 24, bottom: 24, right: 24))
     }
     
     required init?(coder: NSCoder) {

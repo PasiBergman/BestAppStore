@@ -13,12 +13,12 @@ class AppFullScreenDescriptionCell: UITableViewCell {
     
     var descriptionTexts = [String]() {
         didSet {
-            let attributedText = NSMutableAttributedString(string: "")
+            let attributedText = NSMutableAttributedString(string: "\n")
             for (index, element) in descriptionTexts.enumerated() {
                 if index % 2 == 0 {
                     attributedText.append(NSAttributedString(string: element, attributes: [.foregroundColor: UIColor.black]))
                 } else {
-                    attributedText.append(NSAttributedString(string: element + "\n\n\n", attributes: [.foregroundColor: UIColor.gray]))
+                    attributedText.append(NSAttributedString(string: element + "\n\n", attributes: [.foregroundColor: UIColor.gray]))
                 }
             }
             descriptionLabel.attributedText = attributedText

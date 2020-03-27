@@ -53,6 +53,7 @@
 		3FC316C7242B894D00C84097 /* ReviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC316C6242B894D00C84097 /* ReviewCell.swift */; };
 		3FC316C9242B976B00C84097 /* SpacerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC316C8242B976A00C84097 /* SpacerView.swift */; };
 		3FC316CB242BB77D00C84097 /* ReviewsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC316CA242BB77D00C84097 /* ReviewsData.swift */; };
+		3FD3D3B8242DADE800DB42C3 /* TodayItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD3D3B7242DADE800DB42C3 /* TodayItem.swift */; };
 		3FE1E9E8242C78DB003571EA /* TodayController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE1E9E7242C78DB003571EA /* TodayController.swift */; };
 		3FE1E9EB242C7A58003571EA /* TodayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE1E9EA242C7A58003571EA /* TodayCell.swift */; };
 /* End PBXBuildFile section */
@@ -105,6 +106,7 @@
 		3FC316C6242B894D00C84097 /* ReviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCell.swift; sourceTree = "<group>"; };
 		3FC316C8242B976A00C84097 /* SpacerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpacerView.swift; sourceTree = "<group>"; };
 		3FC316CA242BB77D00C84097 /* ReviewsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewsData.swift; sourceTree = "<group>"; };
+		3FD3D3B7242DADE800DB42C3 /* TodayItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayItem.swift; sourceTree = "<group>"; };
 		3FE1E9E7242C78DB003571EA /* TodayController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayController.swift; sourceTree = "<group>"; };
 		3FE1E9EA242C7A58003571EA /* TodayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -254,6 +256,7 @@
 				3F8C41402429CF24004CA1B1 /* FeedResult.swift */,
 				3F8C4145242A3017004CA1B1 /* SocialApp.swift */,
 				3FC316CA242BB77D00C84097 /* ReviewsData.swift */,
+				3FD3D3B7242DADE800DB42C3 /* TodayItem.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -418,6 +421,7 @@
 				3F124B7D242B059800DC4C1C /* AppDetailController.swift in Sources */,
 				3F8C41442429FC23004CA1B1 /* ActivityIndicatorView.swift in Sources */,
 				3F309579242892710004ED83 /* AppsController.swift in Sources */,
+				3FD3D3B8242DADE800DB42C3 /* TodayItem.swift in Sources */,
 				3FC316C1242B5E7D00C84097 /* ScreenshotImageView.swift in Sources */,
 				3FE1E9EB242C7A58003571EA /* TodayCell.swift in Sources */,
 				3F30957024283BB80004ED83 /* Extensions+Double.swift in Sources */,
