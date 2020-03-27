@@ -11,8 +11,9 @@ import UIKit
 class TodayController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout {
     
     let todayItems = [
-        TodayItem.init(category: "LIFE HACK", title: "Utilizing your Time", image: #imageLiteral(resourceName: "garden"), description: "All the tools and apps you need to intelligentry organize your life the right way.", backgroundColor: .white),
-        TodayItem.init(category: "HOLIDAYS", title: "Travel on a Budget", image: #imageLiteral(resourceName: "holiday"), description: "Find out all you need to know on how to travel without packing everything.", backgroundColor: #colorLiteral(red: 0.9746602178, green: 0.9583788514, blue: 0.7279261351, alpha: 1)),
+        TodayItem.init(category: "THE DAILY LIST", title: "Test-Drive These CarPlay Apps", image: nil, description: "", backgroundColor: .white, cellType: .multiple),
+        TodayItem.init(category: "LIFE HACK", title: "Utilizing your Time", image: #imageLiteral(resourceName: "garden"), description: "All the tools and apps you need to intelligentry organize your life the right way.", backgroundColor: .white, cellType: .single),
+        TodayItem.init(category: "HOLIDAYS", title: "Travel on a Budget", image: #imageLiteral(resourceName: "holiday"), description: "Find out all you need to know on how to travel without packing everything.", backgroundColor: #colorLiteral(red: 0.9746602178, green: 0.9583788514, blue: 0.7279261351, alpha: 1), cellType: .single),
     ]
     
     override func viewDidLoad() {
@@ -20,7 +21,8 @@ class TodayController: BaseCollectionViewController, UICollectionViewDelegateFlo
         
         collectionView.backgroundColor = todayBackgroundColor
         
-        collectionView.register(TodayCell.self, forCellWithReuseIdentifier: todayCellId)
+        collectionView.register(TodayCell.self, forCellWithReuseIdentifier: TodayItem.CellType.single.rawValue)
+        collectionView.register(TodayAppsCell.self, forCellWithReuseIdentifier: TodayItem.CellType.multiple.rawValue)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -133,9 +135,13 @@ class TodayController: BaseCollectionViewController, UICollectionViewDelegateFlo
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: todayCellId, for: indexPath) as! TodayCell
         
-        cell.todayItem = todayItems[indexPath.row]
+        let cellId = todayItems[indexPath.row].cellType.rawValue
+        let todayItem = todayItems[indexPath.row]
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! BaseTodayCell
+    
+        cell.todayItem = todayItem
         
         return cell
     }

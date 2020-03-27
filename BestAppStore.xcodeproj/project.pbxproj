@@ -19,6 +19,8 @@
 		3F3095762428475C0004ED83 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 3F3095752428475C0004ED83 /* SDWebImage */; };
 		3F309579242892710004ED83 /* AppsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F309578242892710004ED83 /* AppsController.swift */; };
 		3F30957B242894280004ED83 /* BaseCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F30957A242894280004ED83 /* BaseCollectionViewController.swift */; };
+		3F48EAC5242DFF8A008C86D5 /* TodayAppsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F48EAC4242DFF8A008C86D5 /* TodayAppsCell.swift */; };
+		3F48EAC7242E08BC008C86D5 /* BaseTodayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F48EAC6242E08BC008C86D5 /* BaseTodayCell.swift */; };
 		3F616676242CB65D00362229 /* AppFullScreenDescriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F616675242CB65D00362229 /* AppFullScreenDescriptionCell.swift */; };
 		3F6767862428B46000968D5B /* AppsGroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6767852428B46000968D5B /* AppsGroupCell.swift */; };
 		3F6767882428B67A00968D5B /* Extensions+UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F6767872428B67A00968D5B /* Extensions+UILabel.swift */; };
@@ -70,6 +72,8 @@
 		3F309572242840750004ED83 /* ApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
 		3F309578242892710004ED83 /* AppsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppsController.swift; sourceTree = "<group>"; };
 		3F30957A242894280004ED83 /* BaseCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewController.swift; sourceTree = "<group>"; };
+		3F48EAC4242DFF8A008C86D5 /* TodayAppsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayAppsCell.swift; sourceTree = "<group>"; };
+		3F48EAC6242E08BC008C86D5 /* BaseTodayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTodayCell.swift; sourceTree = "<group>"; };
 		3F616675242CB65D00362229 /* AppFullScreenDescriptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFullScreenDescriptionCell.swift; sourceTree = "<group>"; };
 		3F6767852428B46000968D5B /* AppsGroupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppsGroupCell.swift; sourceTree = "<group>"; };
 		3F6767872428B67A00968D5B /* Extensions+UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extensions+UILabel.swift"; sourceTree = "<group>"; };
@@ -311,6 +315,8 @@
 				3FE1E9EA242C7A58003571EA /* TodayCell.swift */,
 				3F616675242CB65D00362229 /* AppFullScreenDescriptionCell.swift */,
 				3F95FFE4242D7006001C7E0A /* AppFullScreenHeaderCell.swift */,
+				3F48EAC4242DFF8A008C86D5 /* TodayAppsCell.swift */,
+				3F48EAC6242E08BC008C86D5 /* BaseTodayCell.swift */,
 			);
 			path = Today;
 			sourceTree = "<group>";
@@ -401,6 +407,7 @@
 				3F309573242840750004ED83 /* ApiService.swift in Sources */,
 				3F88085A2427708D00B80590 /* AppDelegate.swift in Sources */,
 				3F616676242CB65D00362229 /* AppFullScreenDescriptionCell.swift in Sources */,
+				3F48EAC5242DFF8A008C86D5 /* TodayAppsCell.swift in Sources */,
 				3F6767862428B46000968D5B /* AppsGroupCell.swift in Sources */,
 				3F8FC910242B20E1006C13D8 /* GetButton.swift in Sources */,
 				3F30956124279CAC0004ED83 /* SearchController.swift in Sources */,
@@ -432,6 +439,7 @@
 				3F8FC914242B28DB006C13D8 /* Extensions+UIStackView.swift in Sources */,
 				3F8FC90E242B0FC6006C13D8 /* AppDetailInfoCell.swift in Sources */,
 				3FC316CB242BB77D00C84097 /* ReviewsData.swift in Sources */,
+				3F48EAC7242E08BC008C86D5 /* BaseTodayCell.swift in Sources */,
 				3FAEC4C6242C9565006B07D6 /* AppFullScreenController.swift in Sources */,
 				3F30955F2427774D0004ED83 /* Constants.swift in Sources */,
 				3FC316BF242B5E1500C84097 /* ScreenshotCell.swift in Sources */,
