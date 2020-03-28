@@ -86,7 +86,7 @@ class ApiService {
             }
             
             guard let data = data else {
-                print("Invalid data in fetchGenericJsonData for \(urlString) - response:", resp)
+                print("Invalid data in fetchGenericJsonData for \(urlString) - response:", resp as Any)
                 completion(nil, nil)
                 return
             }

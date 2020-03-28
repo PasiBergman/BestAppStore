@@ -14,13 +14,14 @@ class TodayAppsCell: BaseTodayCell {
         didSet {
             categoryLabel.text = todayItem?.category
             titleLabel.text = todayItem?.title
+            todayAppsController.apps = todayItem.apps
         }
     }
 
     let categoryLabel = UILabel(text: "CATEGORY", font: .boldSystemFont(ofSize: 20), numberOfLines: 1)
     let titleLabel = UILabel(text: "Title", font: .boldSystemFont(ofSize: 28), numberOfLines: 2)
 
-    let todayAppsController = TodayAppsController()
+    let todayAppsController = TodayAppsController(mode: .small)
     
     override init(frame: CGRect) {
         super.init(frame: frame)

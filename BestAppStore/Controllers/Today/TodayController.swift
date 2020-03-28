@@ -10,11 +10,7 @@ import UIKit
 
 class TodayController: BaseCollectionViewController, UICollectionViewDelegateFlowLayout {
     
-    let todayItems = [
-        TodayItem.init(category: "THE DAILY LIST", title: "Test-Drive These CarPlay Apps", image: nil, description: "", backgroundColor: .white, cellType: .multiple),
-        TodayItem.init(category: "LIFE HACK", title: "Utilizing your Time", image: #imageLiteral(resourceName: "garden"), description: "All the tools and apps you need to intelligentry organize your life the right way.", backgroundColor: .white, cellType: .single),
-        TodayItem.init(category: "HOLIDAYS", title: "Travel on a Budget", image: #imageLiteral(resourceName: "holiday"), description: "Find out all you need to know on how to travel without packing everything.", backgroundColor: #colorLiteral(red: 0.9746602178, green: 0.9583788514, blue: 0.7279261351, alpha: 1), cellType: .single),
-    ]
+    var todayItems = [TodayItem]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +19,8 @@ class TodayController: BaseCollectionViewController, UICollectionViewDelegateFlo
         
         collectionView.register(TodayCell.self, forCellWithReuseIdentifier: TodayItem.CellType.single.rawValue)
         collectionView.register(TodayAppsCell.self, forCellWithReuseIdentifier: TodayItem.CellType.multiple.rawValue)
+        
+        fetchData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -38,6 +36,17 @@ class TodayController: BaseCollectionViewController, UICollectionViewDelegateFlo
     var fullScreenController: AppFullScreenController!
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let todayItem = todayItems[indexPath.item]
+        
+        
+        if todayItem.cellType == .multiple {
+            let fullScreenController = TodayAppsController(mode: .fullscreen)
+            fullScreenController.apps = todayItem.apps
+            present(BackEnabledNavigationController(rootViewController: fullScreenController), animated: true)
+            return
+        }
+
         
         // Get the cell which was selected
         guard let selectedCell = collectionView.cellForItem(at: indexPath) else {
@@ -143,7 +152,28 @@ class TodayController: BaseCollectionViewController, UICollectionViewDelegateFlo
     
         cell.todayItem = todayItem
         
+        (cell as? TodayAppsCell)?.todayAppsController.collectionView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTodayAppsTap)))
+        
         return cell
+    }
+    
+    @objc func handleTodayAppsTap(gesture: UIGestureRecognizer) {
+        let collectionView = gesture.view
+        
+        var superView = collectionView?.superview
+        while superView != nil {
+            if let cell = superView as? TodayAppsCell {
+                guard let indexPath = self.collectionView.indexPath(for: cell) else {
+                    return
+                }
+                let todayItem = todayItems[indexPath.item]
+                let appsFullScreenController = TodayAppsController(mode: .fullscreen)
+                appsFullScreenController.apps = todayItem.apps
+                present(BackEnabledNavigationController(rootViewController: appsFullScreenController), animated: true)
+                return
+            }
+            superView = superView?.superview
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -158,4 +188,53 @@ class TodayController: BaseCollectionViewController, UICollectionViewDelegateFlo
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 28
     }
+    
+    // MARK: - Fileprivate
+    
+    fileprivate func fetchData() {
+        
+        var dailyApps: Feed?
+        var dailyGames: Feed?
+        
+        let dispatchGroup = DispatchGroup()
+        
+        activityIndicator.startAnimating()
+        
+        dispatchGroup.enter()
+        ApiService.shared.editorsChoiceApps(completion: { (feedResult, err) in
+            if let err = err {
+                print("Failed to fetch editor's choice game results:", err)
+            } else {
+                if let feed = feedResult?.feed {
+                    dailyApps = feed
+                }
+            }
+            dispatchGroup.leave()
+        })
+
+        dispatchGroup.enter()
+        ApiService.shared.editorsChoiceGames(completion: { (feedResult, err) in
+            if let err = err {
+                print("Failed to fetch editor's choice game results:", err)
+            } else {
+                if let feed = feedResult?.feed {
+                    dailyGames = feed
+                }
+            }
+            dispatchGroup.leave()
+        })
+        dispatchGroup.notify(queue: .main) {
+            
+            self.todayItems = [
+                TodayItem.init(category: "LIFE HACK", title: "Utilizing your Time", image: #imageLiteral(resourceName: "garden"), description: "All the tools and apps you need to intelligentry organize your life the right way.", backgroundColor: .white, apps: nil, cellType: .single),
+                TodayItem.init(category: "THE DAILY LIST", title: dailyApps?.title ?? "", image: nil, description: "", backgroundColor: .white, apps: dailyApps?.results, cellType: .multiple),
+                TodayItem.init(category: "HOLIDAYS", title: "Travel on a Budget", image: #imageLiteral(resourceName: "holiday"), description: "Find out all you need to know on how to travel without packing everything.", backgroundColor: #colorLiteral(red: 0.9746602178, green: 0.9583788514, blue: 0.7279261351, alpha: 1), apps: nil, cellType: .single),
+                TodayItem.init(category: "THE DAILY LIST", title: dailyGames?.title ?? "", image: nil, description: "", backgroundColor: .white, apps: dailyGames?.results, cellType: .multiple),
+            ]
+            
+            self.activityIndicator.stopAnimating()
+            self.collectionView.reloadData()
+        }
+    }
+
 }

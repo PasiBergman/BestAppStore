@@ -57,6 +57,8 @@
 		3FC316C7242B894D00C84097 /* ReviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC316C6242B894D00C84097 /* ReviewCell.swift */; };
 		3FC316C9242B976B00C84097 /* SpacerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC316C8242B976A00C84097 /* SpacerView.swift */; };
 		3FC316CB242BB77D00C84097 /* ReviewsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FC316CA242BB77D00C84097 /* ReviewsData.swift */; };
+		3FD15045242F5733009F5ABD /* CloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD15044242F5733009F5ABD /* CloseButton.swift */; };
+		3FD15047242F7973009F5ABD /* BackEnabledNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD15046242F7973009F5ABD /* BackEnabledNavigationController.swift */; };
 		3FD3D3B8242DADE800DB42C3 /* TodayItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD3D3B7242DADE800DB42C3 /* TodayItem.swift */; };
 		3FE1E9E8242C78DB003571EA /* TodayController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE1E9E7242C78DB003571EA /* TodayController.swift */; };
 		3FE1E9EB242C7A58003571EA /* TodayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE1E9EA242C7A58003571EA /* TodayCell.swift */; };
@@ -114,6 +116,8 @@
 		3FC316C6242B894D00C84097 /* ReviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCell.swift; sourceTree = "<group>"; };
 		3FC316C8242B976A00C84097 /* SpacerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpacerView.swift; sourceTree = "<group>"; };
 		3FC316CA242BB77D00C84097 /* ReviewsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewsData.swift; sourceTree = "<group>"; };
+		3FD15044242F5733009F5ABD /* CloseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseButton.swift; sourceTree = "<group>"; };
+		3FD15046242F7973009F5ABD /* BackEnabledNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackEnabledNavigationController.swift; sourceTree = "<group>"; };
 		3FD3D3B7242DADE800DB42C3 /* TodayItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayItem.swift; sourceTree = "<group>"; };
 		3FE1E9E7242C78DB003571EA /* TodayController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayController.swift; sourceTree = "<group>"; };
 		3FE1E9EA242C7A58003571EA /* TodayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayCell.swift; sourceTree = "<group>"; };
@@ -253,6 +257,7 @@
 				3F8808712427720600B80590 /* BaseTabBarController.swift */,
 				3F30957A242894280004ED83 /* BaseCollectionViewController.swift */,
 				3F8C4149242A6662004CA1B1 /* HorizontalSnappingController.swift */,
+				3FD15046242F7973009F5ABD /* BackEnabledNavigationController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -288,6 +293,7 @@
 				3FC316C0242B5E7D00C84097 /* ScreenshotImageView.swift */,
 				3FC316C8242B976A00C84097 /* SpacerView.swift */,
 				3F309568242828900004ED83 /* VerticalStackView.swift */,
+				3FD15044242F5733009F5ABD /* CloseButton.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -409,6 +415,7 @@
 				3FE1E9E8242C78DB003571EA /* TodayController.swift in Sources */,
 				3F30956B242830C40004ED83 /* SearchResult.swift in Sources */,
 				3F8C414A242A6662004CA1B1 /* HorizontalSnappingController.swift in Sources */,
+				3FD15045242F5733009F5ABD /* CloseButton.swift in Sources */,
 				3FC316C7242B894D00C84097 /* ReviewCell.swift in Sources */,
 				3F309573242840750004ED83 /* ApiService.swift in Sources */,
 				3F88085A2427708D00B80590 /* AppDelegate.swift in Sources */,
@@ -450,6 +457,7 @@
 				3F48EAC7242E08BC008C86D5 /* BaseTodayCell.swift in Sources */,
 				3FAEC4C6242C9565006B07D6 /* AppFullScreenController.swift in Sources */,
 				3F30955F2427774D0004ED83 /* Constants.swift in Sources */,
+				3FD15047242F7973009F5ABD /* BackEnabledNavigationController.swift in Sources */,
 				3FC316BF242B5E1500C84097 /* ScreenshotCell.swift in Sources */,
 				3F8FC912242B235E006C13D8 /* AppIconImageView.swift in Sources */,
 				3FC316BB242B591200C84097 /* AppDetailPreviewsCell.swift in Sources */,

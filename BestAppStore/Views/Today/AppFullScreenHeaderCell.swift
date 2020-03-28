@@ -14,11 +14,7 @@ class AppFullScreenHeaderCell: UITableViewCell {
     
     let todayCell = TodayCell()
     
-    let closeButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setImage(#imageLiteral(resourceName: "close_button"), for: .normal)
-        return button
-    }()
+    let closeButton = CloseButton()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -26,6 +22,7 @@ class AppFullScreenHeaderCell: UITableViewCell {
         addSubview(todayCell)
         todayCell.layer.cornerRadius = 0
         todayCell.fillSuperview()
+        
         addSubview(closeButton)
         closeButton.translatesAutoresizingMaskIntoConstraints = false
         closeButton.anchor(top: topAnchor, leading: nil, bottom: nil, trailing: trailingAnchor, padding: .init(top: 48, left: 0, bottom: 0, right: 12), size: .init(width: 80, height: 38))
