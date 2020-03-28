@@ -39,6 +39,7 @@ class AppFullScreenController: UITableViewController {
             let firstRowCell = AppFullScreenHeaderCell()
             firstRowCell.todayCell.todayItem = todayItem
             firstRowCell.didClickCloseButton = handleCloseViewClick
+            firstRowCell.clipsToBounds = true
             return firstRowCell
         }
         

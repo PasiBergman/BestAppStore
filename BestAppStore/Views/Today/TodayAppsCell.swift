@@ -29,7 +29,6 @@ class TodayAppsCell: BaseTodayCell {
         backgroundColor = .white
         
         layer.cornerRadius = todayCellCornerRadius
-        clipsToBounds = true
         
         let stackView = VerticalStackView(arrangedSubviews: [
             categoryLabel,
