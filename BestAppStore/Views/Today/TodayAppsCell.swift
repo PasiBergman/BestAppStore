@@ -16,17 +16,16 @@ class TodayAppsCell: BaseTodayCell {
             titleLabel.text = todayItem?.title
         }
     }
-    
-    let categoryLabel = UILabel(text: "CATEGORY", font: .boldSystemFont(ofSize: 20))
-    let titleLabel = UILabel(text: "Title", font: .boldSystemFont(ofSize: 32), numberOfLines: 2)
-    
-    let todayAppsController = UIViewController()
+
+    let categoryLabel = UILabel(text: "CATEGORY", font: .boldSystemFont(ofSize: 20), numberOfLines: 1)
+    let titleLabel = UILabel(text: "Title", font: .boldSystemFont(ofSize: 28), numberOfLines: 2)
+
+    let todayAppsController = TodayAppsController()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
     
         backgroundColor = .white
-        todayAppsController.view.backgroundColor = .red
         
         layer.cornerRadius = todayCellCornerRadius
         clipsToBounds = true
@@ -34,7 +33,7 @@ class TodayAppsCell: BaseTodayCell {
         let stackView = VerticalStackView(arrangedSubviews: [
             categoryLabel,
             titleLabel,
-            todayAppsController.view
+            todayAppsController.view!
         ], spacing: 12)
         
         addSubview(stackView)

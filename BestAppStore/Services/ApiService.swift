@@ -57,6 +57,12 @@ class ApiService {
         fetchGenericJsonData(urlString: urlString, completion: completion)
     }
     
+    func editorsChoiceGames(completion: @escaping (FeedResult?, Error?) -> ()) {
+        let urlString = "https://rss.itunes.apple.com/api/v1/fi/ios-apps/new-games-we-love/all/50/explicit.json"
+        fetchGenericJsonData(urlString: urlString, completion: completion)
+    }
+    
+    
     func fetchAppRevies(appId: String, completion: @escaping (ReviewsData?, Error?) -> ()) {
         if appId.isEmpty {
             completion(nil, URLError(.unsupportedURL))

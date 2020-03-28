@@ -23,6 +23,6 @@ class BaseCollectionViewController: UICollectionViewController {
     
     fileprivate func setupActivityIndicator() {
         view.addSubview(activityIndicator)
-        activityIndicator.fillSuperview()
+        activityIndicator.centerInSuperview()
     }
 }

@@ -19,7 +19,7 @@ let appFullScreenDescripitionCellId = "appFullScreenDescripitionCell"
 // APPS
 let appsBarTitle = "Apps"
 let appsTabBarIconName = "apps"
-let appsBackgroundColor = todayBackgroundColor
+let appsBackgroundColor = UIColor.white
 let appsCollectionViewCellId = "appsCell"
 let appsHorizontalCollectionViewCellId = "horizontalAppsCell"
 let appsPageHeaderViewCellId = "headerAppsCell"
@@ -51,9 +51,9 @@ let appDetailReviewWidth: CGFloat = 300
 // SEARCH
 let searchBarTitle = "Search"
 let searchTabBarIconName = "search"
-let searchBackgroundColor = todayBackgroundColor
+let searchBackgroundColor = UIColor.white
 let searchCollectionViewCellId = "searchCell"
-let searchResultCellBackgroundColor = todayBackgroundColor
+let searchResultCellBackgroundColor =  UIColor.clear
 let searchResultScreenShotBackgroundColor = UIColor.clear
 let noSearchResultsLabelText = "No search results"
 
